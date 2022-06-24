@@ -90,6 +90,7 @@ MainRoutes.delete('/todo/:id', mainController.destroy)
 // API Routes that Return JSON
 // *********************************
 APIRoutes.get("/", apiController.example) //"/api"
+APIRoutes.get("/todos", apiController.getTodos)
 
 // *********************************
 // Server Listener
