@@ -85,6 +85,7 @@ MainRoutes.post('/todo', mainController.create)
 MainRoutes.get('/todo/:id', mainController.show)
 MainRoutes.put('/todo/complete/:id', mainController.complete)
 MainRoutes.delete('/todo/:id', mainController.destroy)
+MainRoutes.get("/completed", mainController.completedPage) // "/"
 
 // *********************************
 // API Routes that Return JSON

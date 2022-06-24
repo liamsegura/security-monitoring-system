@@ -69,6 +69,16 @@
             })
         }
         
+        completedPage(req, res){
+            const Todo = req.models.Todo
+            Todo.find({}, (err, todos) => {
+                if(err){
+                res.status(400).send(err)
+                }else{
+                    res.render('completed.ejs', {todos})
+                }
+            })
+        }
             
 
 

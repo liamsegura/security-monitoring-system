@@ -3,12 +3,11 @@
 <%- include("partials/header.ejs") %>
 
 <main>
-    <h1>The Todos</h1>
-    <a href="/todo/new"><button>Create Todo</button></a>
-    <a href="/completed"><button>completed todos</button></a>
+    <a href="/"><button>Back</button></a>
+    <h1>Completed Todos</h1>
     <ul>
          <% todos.forEach((todo, index) => { %>
-            <% if(todo.completed == false){  %>
+            <% if(todo.completed == true){  %>
             <a href="/todo/<%= todo._id %>">
             <li><%= todo.message %></li>
             </a>
