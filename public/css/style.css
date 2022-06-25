@@ -4,13 +4,17 @@
 
 @media (max-width: 576px){
     body{
-        font-size:10px;
+        font-size:16px;
     }
     .table td, .table th{
-        padding: 0.2rem;
+        padding: 0.3rem;
     }
     .card-body{
         padding: 0.5rem;
+    }
+    .container-fluid{
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
     }
 }
 
