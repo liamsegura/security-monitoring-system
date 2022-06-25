@@ -49,7 +49,7 @@ const buildingSchema = new mongoose.Schema({
         }
     }],
     staff: Number,
-    listed: Boolean,
+    listed: { type: Boolean, default: true }
 }, { timestamps: true })
 
 //building model
@@ -112,8 +112,8 @@ APIRoutes.use(cors())
 // *********************************
 MainRoutes.get("/", mainController.index) // "/"
 MainRoutes.get("/removedBuildings", mainController.removedBuildings)
-MainRoutes.get("/todo/new", mainController.new)
-MainRoutes.post('/todo', mainController.create)
+MainRoutes.get("/newBuilding", mainController.newBuilding)
+MainRoutes.post('/createBuilding', mainController.createBuilding)
 MainRoutes.get('/todo/:id', mainController.show)
 MainRoutes.put('/building/remove/:id', mainController.buildingRemove)
 MainRoutes.delete('/building/:id', mainController.buildingDestroy)
@@ -142,7 +142,6 @@ APIRoutes.get("/todos", apiController.getTodos)
 //                 room: 5, details:null
 //             }],
 //             staff: 2,
-//             listed: true
 //         })
         
 //         console.log(circle)

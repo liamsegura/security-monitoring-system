@@ -17,14 +17,25 @@
             })
         }
 
-        new(req, res){
-            res.render("new.ejs")
+        newBuilding(req, res){
+            res.render("newBuilding.ejs")
         }
 
-        create(req, res){
-            const Todo = req.models.Todo
-            req.body.completed = false
-            Todo.create(req.body, (err, todo) => {
+        createBuilding (req, res){
+            const Building = req.models.Building
+            //converts number of rooms to object structure
+            function pushToArr(num){
+                let arr = []
+                let sum = 0
+                for(let i = 0; i < num;i++){
+                arr.push({room: sum+= 1, details: null})
+                }
+                return arr
+            }
+            const roomNumberArr = pushToArr(req.body.rooms)
+            req.body.rooms = roomNumberArr
+
+            Building.create(req.body, (err, todo) => {
                 if(err){
                     res.status(400).send(err)
                 }else{

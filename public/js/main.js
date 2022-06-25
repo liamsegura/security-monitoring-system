@@ -87,3 +87,19 @@ async function buildingDelete(){
         }
 }
 }
+
+
+
+
+function pushToArr(num){
+    
+    
+    let arr = []
+    let sum = 0
+    for(let i = 0; i < num;i++){
+    arr.push({number: sum+= 1, name: null})
+    }
+    console.log(arr)
+}
+
+pushToArr(4)

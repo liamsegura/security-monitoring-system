@@ -39,24 +39,28 @@
                                     <th>Address</th>
                                     <th>Rooms</th>
                                     <th>Staff</th>
-                                    <th class="cursor-pointer bg-success text-center" onclick="window.location='/createBuilding'"><span class="fa fa-plus text-white"></span></th>
+                                    <th class="cursor-pointer bg-success text-center" onclick="window.location='/newBuilding'"><span class="fa fa-plus text-white"></span></th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <% let sum = 0 %>
                                       <% buildings.forEach(building => { %>
                                           <% if( building.listed == true) { %>
-                                          <tr>
-                                            <td class="text-center"><%= sum += 1 %></td>
-                                            <td><%= building.name %></td>
-                                            <td ><%= building.address %></td>
-                                            <td><%= building.rooms.length %></td>
-                                            <td><%= building.staff %></td>
-                                            <td class="cursor-pointer bg-danger text-center"><form action="/building/remove/<%= building._id %>?_method=PUT" method="POST">
-                                              <button type="submit" class="fa fa-ban text-white bg-none">
-                                              </button>
-                                          </form></td>
-                                          </tr>
+                                         
+                                            <tr onClick="window.location ='/removedBuildings'">
+                                                <td class="text-center"><%= sum += 1 %></td>
+                                                <td><%= building.name %></td>
+                                                <td><%= building.address %></td>
+                                                <td><%= building.rooms.length %></td>
+                                                <td><%= building.staff %></td>
+                                                <td class="cursor-pointer bg-danger text-center">
+                                                  <form action="/building/remove/<%= building._id %>?_method=PUT" method="POST">
+                                                    <button type="submit" class="fa fa-ban text-white bg-none"></button>
+                                                   </form>
+                                                </td>
+                                            </tr>
+                                        
+                                         
                                           <% } %>
                                       <% }) %>
                                           

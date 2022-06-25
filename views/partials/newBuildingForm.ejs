@@ -10,20 +10,20 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Create Building</h1>
                         </div>
-                        <form action="/api" method="POST" class="user">
+                        <form action="/createBuilding" method="POST" class="user">
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="exampleInputEmail"
-                                    placeholder="Building Name" name="buildingName" required="true">
+                                <input type="text" class="form-control form-control-user"
+                                    placeholder="Building Name" name="name" required="true">
                             </div>
                             <div class="form-group">
-                                <input type="number" class="form-control form-control-user" id="exampleInputEmail" placeholder="Building Capacity" name="buildingRoomNumber" required="true">
+                                <input type="text" class="form-control form-control-user"  placeholder="Address" name="address" required="true">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="exampleInputEmail" placeholder="location" name="buildingLocation" required="true">
+                                <input type="number" class="form-control form-control-user" placeholder="Amount of rooms" name="rooms" required="true">
 
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="exampleInputEmail" placeholder="Client name" name="clientName" required="true">
+                                <input type="number" class="form-control form-control-user" placeholder="Staff" name="staff" required="true">
                             </div>
                             <button type="submit" id="update-btn" class="btn btn-facebook btn-user btn-block">
                                 <i class="fa fa-login"></i> Submit
