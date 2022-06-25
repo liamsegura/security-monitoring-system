@@ -70,6 +70,7 @@ const residentSchema = new mongoose.Schema({
     seen: Boolean,
 }, {timestamps: true})
 
+
 //Resident model
 const Resident = mongoose.model('Resident', residentSchema)
 
@@ -93,7 +94,8 @@ const APIRoutes = express.Router()
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(methodOverride("_method"))
-app.use(express.static('public'))
+app.use("/public", express.static('public'))
+app.use("/css", express.static('public/css'))
 app.use(morgan("tiny"))
 //use models on all routes
 app.use((req, res, next) => {
@@ -111,11 +113,11 @@ APIRoutes.use(cors())
 // Routes that Render Pages with EJS
 // *********************************
 MainRoutes.get("/", mainController.index) // "/"
-MainRoutes.get("/removedBuildings", mainController.removedBuildings)
 MainRoutes.get("/newBuilding", mainController.newBuilding)
 MainRoutes.post('/createBuilding', mainController.createBuilding)
-MainRoutes.get('/todo/:id', mainController.show)
+MainRoutes.get('/building/:id', mainController.viewBuilding)
 MainRoutes.put('/building/remove/:id', mainController.buildingRemove)
+MainRoutes.get("/removedBuildings", mainController.removedBuildings)
 MainRoutes.delete('/building/:id', mainController.buildingDestroy)
 MainRoutes.get("/completed", mainController.completedPage) // "/"
 
@@ -127,24 +129,59 @@ APIRoutes.get("/todos", apiController.getTodos)
 
 
 // mongoose.connection.on('open', async () => {
-//     const circle = await Building.create({
-//             name: "The Circle",
-//             address: "Western Road",
-//             rooms: [{
-//                 room: 1, details:null
-//             },{
-//                 room: 2, details:null
-//             },{
-//                 room: 3, details:null
-//             },{
-//                 room: 4, details:null
-//             },{
-//                 room: 5, details:null
-//             }],
-//             staff: 2,
-//         })
-        
-//         console.log(circle)
+
+    // const circle = await Building.create({
+    //         name: "The Circle",
+    //         address: "Western Road",
+    //         rooms: [{
+    //             room: 1, details:null
+    //         },{
+    //             room: 2, details:null
+    //         },{
+    //             room: 3, details:null
+    //         },{
+    //             room: 4, details:null
+    //         },{
+    //             room: 5, details:null
+    //         }],
+    //         staff: 2,
+    //     })
+      
+
+//find building
+// const building = await Building.findOne({name: "The Circle"}).populate({
+//     path: 'rooms',
+//     populate: [{
+//      path: 'details',
+//      model: 'Resident'
+//     }]
+//  }).exec()
+
+
+
+// // // //create person andd add them to found building
+// const person = await Resident.create({
+//     name: "Jane Doe", 
+//     dob: "12/5/1983", 
+//     contact: "0714333455518",
+//     info: "test", 
+//     building: building, 
+//     roomnumber: 2,
+// })
+
+
+// // // // //push newly created resident onto building, remove a room from capacity and save
+// // // // //find index of objects in rooms and assign to var
+// const objIndex = building.rooms.findIndex((obj => obj.room == person.roomnumber))
+// console.log(objIndex)
+// building.rooms[objIndex].details = person
+
+// await building.save()
+
+
+
+
+//  console.log(building)
 // })
 
 // *********************************

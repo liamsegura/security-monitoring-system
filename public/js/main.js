@@ -92,8 +92,6 @@ async function buildingDelete(){
 
 
 function pushToArr(num){
-    
-    
     let arr = []
     let sum = 0
     for(let i = 0; i < num;i++){
@@ -101,5 +99,3 @@ function pushToArr(num){
     }
     console.log(arr)
 }
-
-pushToArr(4)

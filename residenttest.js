@@ -76,56 +76,48 @@ mongoose.connection.on('open', async () => {
 
   
 // create building
-const circle = await Building.create({
-    name: "The Circle",
-    address: "Western Road",
-    rooms: [{
-        room: 1, details:null
-    },{
-        room: 2, details:null
-    },{
-        room: 3, details:null
-    },{
-        room: 4, details:null
-    },{
-        room: 5, details:null
-    }]
-})
+// const circle = await Building.create({
+//     name: "The Circle",
+//     address: "Western Road",
+//     rooms: [{
+//         room: 1, details:null
+//     },{
+//         room: 2, details:null
+//     },{
+//         room: 3, details:null
+//     },{
+//         room: 4, details:null
+//     },{
+//         room: 5, details:null
+//     }]
+// })
 
 // // find building and populate resident list
-// const circle = await Building.findOne({name: "The Circle"}).populate({
-//     path: 'rooms',
-//     populate: [{
-//      path: 'details',
-//      model: 'Resident'
-//     }]
-//  }).exec()
+const circle = await Building.findOne({name: "The Circle"}).populate({
+    path: 'rooms',
+    populate: [{
+     path: 'details',
+     model: 'Resident'
+    }]
+ }).exec()
 
 
 // // //create person andd add them to found building
-// const person = await Resident.create({name: "Jane Doe", dob: "12/5/1983", number: "0714333455518", building: circle, roomnumber: 2})
+const person = await Resident.create({name: "Jane Doe", dob: "12/5/1983", number: "0714333455518", building: circle, roomnumber: 2})
 
 
-// // // //push newly created resident onto building, remove a room from capacity and save
-// // // //find index of objects in rooms and assign to var
-// const objIndex = circle.rooms.findIndex((obj => obj.room == person.roomnumber))
-// console.log(objIndex)
+// // //push newly created resident onto building, remove a room from capacity and save
+// // //find index of objects in rooms and assign to var
+const objIndex = circle.rooms.findIndex((obj => obj.room == person.roomnumber))
+console.log(objIndex)
 
-// circle.rooms[objIndex].details = person
+circle.rooms[objIndex].details = person
 
-// await circle.save()
+await circle.save()
 
-//removed building test
-
-// const changeDb = await Building.findOne({name: "The Circle"})
-
-// await Building.deleteOne({name: "The Circle"})
-// const buildingList = await RemoveBuilding.create(changeDb)
-//         await Building.deleteOne({name: "The Circle"})
-//         res.json('worked')
 
 // console.log and show all data This is caused by console.log() limiting the depth of the data it will show
-console.log( inspect(buildingList, { depth : null }) );
+console.log( inspect(building, { depth : null }) );
     //close conection
     mongoose.connection.close()
 })

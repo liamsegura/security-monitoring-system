@@ -1,10 +1,6 @@
     class MainController {
         
-        example(req, res){
-            res.render("example.ejs", {
-                text: "This is an example API Route"
-            })
-        }
+        //Building
 
         index(req, res){
             const Building = req.models.Building
@@ -44,14 +40,15 @@
             })
         }
 
-        show(req, res){
+        viewBuilding(req, res){
             const id = req.params.id
-            const Todo = req.models.Todo
-            Todo.findById(id, (err, todo) => {
+            const Building = req.models.Building
+            Building.findById(id, (err, building) => {
                 if(err){
                     res.status(400).send(err)
                 }else{
-                    res.render('show.ejs', {todo})
+                    let rooms = building.rooms
+                    res.render('building.ejs', {rooms, building})
                 }
             })
         }
