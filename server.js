@@ -94,8 +94,7 @@ const APIRoutes = express.Router()
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(methodOverride("_method"))
-app.use("/public", express.static('public'))
-app.use("/css", express.static('public/css'))
+app.use(express.static('public'))
 app.use(morgan("tiny"))
 //use models on all routes
 app.use((req, res, next) => {

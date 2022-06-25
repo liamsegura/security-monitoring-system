@@ -47,7 +47,7 @@
                                       <% buildings.forEach(building => { %>
                                           <% if( building.listed == true) { %>
                                          
-                                            <tr onClick="window.location ='/building/<%= building._id %>'">
+                                            <tr class="cursor-pointer"onClick="window.location ='/building/<%= building._id %>'">
                                                 <td class="text-center"><%= sum += 1 %></td>
                                                 <td><%= building.name %></td>
                                                 <td><%= building.address %></td>
