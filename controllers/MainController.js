@@ -88,17 +88,33 @@
             })
         }
         
-        completedPage(req, res){
-            const Todo = req.models.Todo
-            Todo.find({}, (err, todos) => {
-                if(err){
-                res.status(400).send(err)
-                }else{
-                    res.render('completed.ejs', {todos})
-                }
-            })
-        }
+        // completedPage(req, res){
+        //     const Todo = req.models.Todo
+        //     Todo.find({}, (err, todos) => {
+        //         if(err){
+        //         res.status(400).send(err)
+        //         }else{
+        //             res.render('completed.ejs', {todos})
+        //         }
+        //     })
+        // }
             
+        newResident(req, res){
+            const id = req.params.id
+            console.log(id)
+            res.render("newResident.ejs", {id: id})
+            }
+        //     const id = req.params.id
+        //     const Building = req.models.Building
+        //     Building.findById(id, (err, building) => {
+        //         if(err){
+        //             res.status(400).send(err)
+        //         }else{
+        //             console.log(id)
+        //             res.render('newResident.ejs', {id, building})
+        //         }
+        //     })
+        // }
 
 
 }

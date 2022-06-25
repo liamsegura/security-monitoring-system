@@ -1,5 +1,6 @@
 // document.getElementById('update-btn').addEventListener('click', updateEntry)
 
+
 const removeBuilding = document.querySelectorAll('.remove')
 const deleteBuilding = document.querySelectorAll('.delete')
 
@@ -98,4 +99,10 @@ function pushToArr(num){
     arr.push({number: sum+= 1, name: null})
     }
     console.log(arr)
+}
+
+
+const clicked = (e) => {
+  e.preventDefault()
+confirm('Are you sure you want to submit this form?');
 }

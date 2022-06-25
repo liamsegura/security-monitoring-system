@@ -8,19 +8,18 @@
                 <div class="col-lg-7">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Create Site</h1>
+                            <h1 class="h4 text-gray-900 mb-4">New Resident</h1>
                         </div>
-                        <form action="/createBuilding" method="POST" class="user">
+                        <form action="/createResident" method="POST" class="user">
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-user"
                                     placeholder="Building Name" name="name" required="true">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user"  placeholder="Address" name="address" required="true">
+                                <input type="text" class="form-control form-control-user"  placeholder="Date of birth" name="dob" required="true">
                             </div>
                             <div class="form-group">
-                                <input type="number" class="form-control form-control-user" placeholder="Amount of rooms" name="rooms" required="true" max="99">
-
+                                <input type="number" class="form-control form-control-user" placeholder="Contact" name="contact" required="true" max="99">
                             </div>
                             <div class="form-group">
                                 <input type="number" class="form-control form-control-user" placeholder="Staff" name="staff" required="true" max="10">

@@ -84,7 +84,7 @@
                                   <th>Empty Room</th>
                                   <th>test</th>
                                   <th>test</th>
-                                  <th class="cursor-pointer bg-success text-center" onclick="window.location='/newBuilding'"><span class="fa fa-plus text-white"></span></th>
+                                  <th class="cursor-pointer bg-success text-center" onclick="window.location='/newResident/<%= building._id %>'"><span class="fa fa-plus text-white"></span></th>
                                 <%}else{%>
                                   <th> <%= obj.details %></th>
                                   <th><%= obj.room %></th>
@@ -103,9 +103,10 @@
 
                           </table>
                       </div>
+                      <a href="/">Dashboard</a>
                   </div>
               </div>
-
+             
           </div>
           <!-- /.container-fluid -->
 

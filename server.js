@@ -99,7 +99,8 @@ app.use(morgan("tiny"))
 //use models on all routes
 app.use((req, res, next) => {
     req.models = {
-        Building
+        Building,
+        Resident
     }
     next()
 })
@@ -118,7 +119,10 @@ MainRoutes.get('/building/:id', mainController.viewBuilding)
 MainRoutes.put('/building/remove/:id', mainController.buildingRemove)
 MainRoutes.get("/removedBuildings", mainController.removedBuildings)
 MainRoutes.delete('/building/:id', mainController.buildingDestroy)
-MainRoutes.get("/completed", mainController.completedPage) // "/"
+
+
+//Resident Routes
+MainRoutes.get('/newResident/:id', mainController.newResident)
 
 // *********************************
 // API Routes that Return JSON
