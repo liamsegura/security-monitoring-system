@@ -7,12 +7,12 @@
         }
 
         index(req, res){
-            const Todo = req.models.Todo
-            Todo.find({}, (err, todos) => {
+            const Building = req.models.Building
+            Building.find({}, (err, buildings) => {
                 if(err){
                 res.status(400).send(err)
                 }else{
-                    res.render('index.ejs', {todos})
+                    res.render('index.ejs', {buildings})
                 }
             })
         }
@@ -45,10 +45,10 @@
             })
         }
 
-        complete(req, res){
+        buildingRemove(req, res){
                 const id = req.params.id
-                const Todo = req.models.Todo
-                Todo.findByIdAndUpdate(id, {completed: true}, {new: true}, (err, todo) => {
+                const Building = req.models.Building
+                Building.findByIdAndUpdate(id, {listed: false}, {new: true}, (err, building) => {
                     if(err){
                         res.status(400).send(err)
                     }else{
@@ -57,14 +57,25 @@
                 })
             }
 
-        destroy(req, res){
+        removedBuildings(req, res){
+            const Building = req.models.Building
+            Building.find({}, (err, buildings) => {
+                if(err){
+                res.status(400).send(err)
+                }else{
+                    res.render('removedBuildings.ejs', {buildings})
+                }
+            })
+        }
+
+        buildingDestroy(req, res){
             const id = req.params.id
-            const Todo = req.models.Todo
-            Todo.findByIdAndDelete(id, (err, todo) => {
+            const Building = req.models.Building
+            Building.findByIdAndDelete(id, (err, buildings) => {
                 if(err){
                     res.status(400).send(err)
                 }else{
-                    res.redirect('/')
+                    res.redirect('/removedBuildings')
                 }
             })
         }

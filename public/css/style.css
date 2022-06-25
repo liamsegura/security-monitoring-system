@@ -1,0 +1,20 @@
+.cursor-pointer{
+    cursor: pointer!important;
+  }
+
+@media (max-width: 576px){
+    body{
+        font-size:10px;
+    }
+    .table td, .table th{
+        padding: 0.2rem;
+    }
+    .card-body{
+        padding: 0.5rem;
+    }
+}
+
+button{
+    background: none;
+    border: none;
+}

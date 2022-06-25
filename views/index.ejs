@@ -1,18 +1,75 @@
-<%- include("partials/head.ejs") %>
+<%- include('partials/header.ejs') %>
 
-<%- include("partials/header.ejs") %>
+<body id="page-top">
 
-<main>
-    <h1>The Todos</h1>
-    <a href="/todo/new"><button>Create Todo</button></a>
-    <a href="/completed"><button>completed todos</button></a>
-    <ul>
-         <% todos.forEach((todo, index) => { %>
-            <% if(todo.completed == false){  %>
-            <a href="/todo/<%= todo._id %>">
-            <li><%= todo.message %></li>
-            </a>
-            <% } %>
-         <% }) %>
-    </ul>
-</main>
+  <%- include('partials/navSection.ejs') %>
+
+               <!-- Begin Page Content -->
+               <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 mb-4 text-gray-800">Dashboard</h1>
+                <!-- <h2 class="mb-4">Building Site Overview</h2> -->
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Site Overview</h6>
+                        <a href="/removedBuildings" class="m-0 font-weight-bold text-primary">removed buildings</a>
+                      </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                          <div class="row align-items-center justify-content-between pb-3">
+                            <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 pl-2 navbar-search">
+                              <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small shadow-none" placeholder="Search...">
+                                  <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                  </div>
+                                </div>
+                            </form>
+                          </div>
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Building</th>
+                                    <th>Address</th>
+                                    <th>Rooms</th>
+                                    <th>Staff</th>
+                                    <th class="cursor-pointer bg-success text-center" onclick="window.location='/createBuilding'"><span class="fa fa-plus text-white"></span></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <% let sum = 0 %>
+                                      <% buildings.forEach(building => { %>
+                                          <% if( building.listed == true) { %>
+                                          <tr>
+                                            <td class="text-center"><%= sum += 1 %></td>
+                                            <td><%= building.name %></td>
+                                            <td ><%= building.address %></td>
+                                            <td><%= building.rooms.length %></td>
+                                            <td><%= building.staff %></td>
+                                            <td class="cursor-pointer bg-danger text-center"><form action="/building/remove/<%= building._id %>?_method=PUT" method="POST">
+                                              <button type="submit" class="fa fa-ban text-white bg-none">
+                                              </button>
+                                          </form></td>
+                                          </tr>
+                                          <% } %>
+                                      <% }) %>
+                                          
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+<%- include('partials/footer.ejs') %>

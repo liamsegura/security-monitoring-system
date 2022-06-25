@@ -1,0 +1,18 @@
+<%- include("partials/head.ejs") %>
+
+<%- include("partials/header.ejs") %>
+
+<main>
+    <h1>The Todos</h1>
+    <a href="/todo/new"><button>Create Todo</button></a>
+    <a href="/completed"><button>completed todos</button></a>
+    <ul>
+         <% todos.forEach((todo, index) => { %>
+            <% if(todo.completed == false){  %>
+            <a href="/todo/<%= todo._id %>">
+            <li><%= todo.message %></li>
+            </a>
+            <% } %>
+         <% }) %>
+    </ul>
+</main>
