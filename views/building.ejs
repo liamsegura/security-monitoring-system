@@ -70,7 +70,6 @@
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none show">
                           <a class="nav-link dropdown-toggle text-gray-500 pl-3 pb-3" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <span>Search</span>  
                             <i class="fas fa-search fa-fw"></i>
                           </a>
                           <!-- Dropdown - Messages -->
@@ -112,7 +111,7 @@
                                 <tr class="cursor-pointer"onClick="window.location ='/resident/<%= obj.details._id %>'">
                                   <th class="text-center"><%= obj.room %></th>
                                   <th> <%= obj.details.name %></th>
-                                  <th><%= obj.seen %></th>
+                                  <th><%= obj.details.seen %></th>
                                   <td class="cursor-pointer bg-danger text-center">
                                     <!-- <form action="/building/<%= building._id %>?_method=DELETE" method="POST">
                                     <button type="submit" class="fa fa-ban text-white bg-none">
