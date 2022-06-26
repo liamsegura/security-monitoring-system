@@ -42,19 +42,6 @@
                                 <% let sum = 0 %>
                                     <% buildings.forEach(building => { %>
                                         <% if( building.listed == false) { %>
-                                        <tr>
-                                          <td class="text-center"><%= sum += 1 %></td>
-                                          <td><%= building.name %></td>
-                                          <td ><%= building.address %></td>
-                                          <td><%= building.rooms.length %></td>
-                                          <td><%= building.staff %></td>
-                                          <td class="cursor-pointer bg-danger text-center">
-                                            <form id="removePrompt" onClick="clicked()" action="/building/<%= building._id %>?_method=DELETE" method="POST">
-                                            <button type="submit" class="fa fa-ban text-white bg-none">
-                                            </button>
-                                        </form></td>                                                   
-                                        </tr>
-
                                            
                                         <tr class="cursor-pointer"onClick="window.location ='/building/<%= building._id %>'">
                                           <td class="text-center"><%= sum += 1 %></td>
