@@ -5,6 +5,9 @@ textarea{
     border-radius: 15px!important;
     padding: 1rem;
 }
+li{
+   list-style: none;
+}
 
 @media (max-width: 576px){
     body{
@@ -21,6 +24,13 @@ textarea{
         padding-left: 0.4rem;
         padding-right: 0.4rem;
     }
+    .dropdown .dropdown-menu{
+        width: 100%;
+    }
+    .navbar-nav .dropdown-menu {
+        position: absolute;
+        float: none;
+        }
 }
 
 button{

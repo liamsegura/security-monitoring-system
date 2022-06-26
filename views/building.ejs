@@ -50,27 +50,45 @@
                   </div>
               </div>
 
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-                  <div class="card-header py-3">
-                      <h6 class="m-0 font-weight-bold text-primary">Resident list</h6>
-                    </div>
-                  <div class="card-body">
-                      <div class="table-responsive">
-                        <div class="row align-items-center justify-content-between pb-3">
-                          <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 pl-2 navbar-search">
-                            <div class="input-group">
-                              <input type="text" class="form-control bg-light border-0 small shadow-none" placeholder="Search...">
-                                <div class="input-group-append">
-                                  <button class="btn btn-primary" type="button">
-                                  <i class="fas fa-search fa-sm"></i>
-                                  </button>
-                                </div>
+               <!-- DataTales Example -->
+               <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                      <div class="row align-items-center justify-content-between pb-1">
+                        <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 pl-2 navbar-search">
+                          <div class="input-group pb-3">
+                            <input type="text" class="form-control bg-light border-0 small shadow-none" placeholder="Search...">
+                              <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                                </button>
                               </div>
-                          </form>
-                        </div>
+                            </div>
+                        </form>
+                      </div>
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none show">
+                          <a class="nav-link dropdown-toggle text-gray-500 pl-3 pb-3" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span>Search</span>  
+                            <i class="fas fa-search fa-fw"></i>
+                          </a>
+                          <!-- Dropdown - Messages -->
+                          <div class="dropdown-menu dropdown-menu-right p-3 shadow" aria-labelledby="searchDropdown">
+                              <form class="form-inline mr-auto w-100 navbar-search">
+                                  <div class="input-group">
+                                      <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                      <div class="input-group-append">
+                                          <button class="btn btn-primary" type="button">
+                                              <i class="fas fa-search fa-sm"></i>
+                                          </button>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                      </li>
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                          
+                            
                               <thead>
                                 <tr>
                                   <th class="text-center">Room</th>
@@ -85,7 +103,7 @@
                                 <tr>
                                   <th class="text-center"><%= obj.room %></th>
                                 <% if (obj.details == null || obj.details == undefined){ %>
-                                  <th>Empty Room</th>
+                                  <th class="font-weight-light" >Empty Room</th>
                                   <th></th>
                                   <th class="cursor-pointer bg-success text-center" onclick="window.location='/newResident/<%= building._id %>/<%= obj.room %>'"><span class="fa fa-plus text-white"></span></th>
                                 <%}else{%>

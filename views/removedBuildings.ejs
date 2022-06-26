@@ -8,16 +8,16 @@
                <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 mb-4 text-gray-800">Removed Sites</h1>
+                <h1 class="h3 mb-2 mb-4 ml-3 text-gray-800">Removed Sites</h1>
                 <!-- <h2 class="mb-4">Building Site Overview</h2> -->
-
+                
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                   <div class="card-body">
                       <div class="table-responsive">
-                        <div class="row align-items-center justify-content-between pb-3">
+                        <div class="row align-items-center justify-content-between pb-1">
                           <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 pl-2 navbar-search">
-                            <div class="input-group">
+                            <div class="input-group pb-3">
                               <input type="text" class="form-control bg-light border-0 small shadow-none" placeholder="Search...">
                                 <div class="input-group-append">
                                   <button class="btn btn-primary" type="button">
@@ -27,10 +27,31 @@
                               </div>
                           </form>
                         </div>
+
+                          <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                          <li class="nav-item dropdown no-arrow d-sm-none show">
+                            <a class="nav-link dropdown-toggle text-gray-500 pl-3 pb-3" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                              <span>Search</span>  
+                              <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow" aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                  
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                 <tr>
-                                  <th class="text-center">#</th>
                                   <th>Building</th>
                                   <th>Address</th>
                                   <th>Rooms</th>
@@ -39,12 +60,10 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <% let sum = 0 %>
                                     <% buildings.forEach(building => { %>
                                         <% if( building.listed == false) { %>
                                            
                                         <tr class="cursor-pointer"onClick="window.location ='/building/<%= building._id %>'">
-                                          <td class="text-center"><%= sum += 1 %></td>
                                           <td><%= building.name %></td>
                                           <td><%= building.address %></td>
                                           <td><%= building.rooms.length %></td>

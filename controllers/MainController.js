@@ -31,7 +31,7 @@
             const roomNumberArr = pushToArr(req.body.rooms)
             req.body.rooms = roomNumberArr
 
-            Building.create(req.body, (err, todo) => {
+            Building.create(req.body, (err) => {
                 if(err){
                     res.status(400).send(err)
                 }else{

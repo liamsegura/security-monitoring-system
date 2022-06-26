@@ -3051,6 +3051,8 @@ input[type="button"].btn-block {
   .dropdown-menu-sm-right {
     right: 0;
     left: auto;
+    transform: none;
+    width: 100%!important;
   }
 }
 
