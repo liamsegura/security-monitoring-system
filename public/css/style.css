@@ -1,13 +1,18 @@
 .cursor-pointer{
     cursor: pointer!important;
   }
+textarea{
+    border-radius: 15px!important;
+    padding: 1rem;
+}
 
 @media (max-width: 576px){
     body{
         font-size:16px;
     }
     .table td, .table th{
-        padding: 0.3rem;
+        padding: 0.2rem;
+        padding-left: 0.1rem;
     }
     .card-body{
         padding: 0.5rem;

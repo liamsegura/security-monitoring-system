@@ -30,16 +30,21 @@
 
                <!-- Begin Page Content -->
                <div class="container-fluid">
-
+                <% let emptyrooms = 0 %>
                 <!-- Page Heading -->
-                
+                <% rooms.forEach(obj => { %>                         
 
+                  <% if (obj.details == null || obj.details == undefined){ %>
+                    <% emptyrooms += 1 %>
+                    <% } %>
+                <% }) %>
                 <div class="card shadow mb-4">
                   <div class="card-body">
                     <h1 class="h3 mb-2 mb-4 pl-4 pt-4 text-gray-800"><%= building.name %></h1>
                       <ul>
                         <li>Address: <%= building.address %></li>
-                        <li>Rooms: <%= building.rooms.length %></li>
+                        <li>Capacity: <%= building.rooms.length %></li>
+                        <li>Empty Rooms: <%= emptyrooms %></li>
                         <li>Staff: <%= building.staff %></li>
                       </ul>
                   </div>
@@ -87,9 +92,9 @@
                                   <th> <%= obj.details.name %></th>
                                   <th><%= obj.seen %></th>
                                   <td class="cursor-pointer bg-danger text-center">
-                                    <form action="/building/<%= building._id %>?_method=DELETE" method="POST">
+                                    <!-- <form action="/building/<%= building._id %>?_method=DELETE" method="POST">
                                     <button type="submit" class="fa fa-ban text-white bg-none">
-                                    </button>
+                                    </button> -->
                                 </form></td>  
                                  <%}%>
                                 
