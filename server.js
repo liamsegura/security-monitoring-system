@@ -41,6 +41,7 @@ mongoose.connection
 
 const buildingSchema = new mongoose.Schema({
     name: String,
+    location: String,
     address: String,
     rooms: [{
         room: Number,
@@ -124,6 +125,8 @@ MainRoutes.delete('/building/:id', mainController.buildingDestroy)
 //Resident Routes
 MainRoutes.get('/newResident/:id/:roomNumber', mainController.newResident)
 MainRoutes.post('/createResident', mainController.createResident)
+MainRoutes.get('/resident/:id', mainController.viewResident)
+
 
 // *********************************
 // API Routes that Return JSON

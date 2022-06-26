@@ -146,6 +146,19 @@
                 }
             
 
+            async viewResident(req, res){
+                const id = req.params.id
+                const residentModel = req.models.Resident
+                const resident = await residentModel.findById(id).populate('building')
+                    try {
+                        res.render('resident.ejs', {resident})  
+                    } catch (error) {
+                        console.log(error)
+                    }
+                        
+                }
+                            
+
 }
  
 export default MainController
