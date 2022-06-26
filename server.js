@@ -122,7 +122,8 @@ MainRoutes.delete('/building/:id', mainController.buildingDestroy)
 
 
 //Resident Routes
-MainRoutes.get('/newResident/:id', mainController.newResident)
+MainRoutes.get('/newResident/:id/:roomNumber', mainController.newResident)
+MainRoutes.post('/createResident', mainController.createResident)
 
 // *********************************
 // API Routes that Return JSON

@@ -68,9 +68,8 @@
                           
                               <thead>
                                 <tr>
-                                  <th></th>
-                                  <th>Name</th>
                                   <th>Room</th>
+                                  <th>Name</th>
                                   <th>Last Seen</th>
                                   <td></td>   
                                 </tr>
@@ -82,13 +81,11 @@
                                   <th class="text-center"><%= obj.room %></th>
                                 <% if (obj.details == null || obj.details == undefined){ %>
                                   <th>Empty Room</th>
-                                  <th>test</th>
-                                  <th>test</th>
-                                  <th class="cursor-pointer bg-success text-center" onclick="window.location='/newResident/<%= building._id %>'"><span class="fa fa-plus text-white"></span></th>
+                                  <th></th>
+                                  <th class="cursor-pointer bg-success text-center" onclick="window.location='/newResident/<%= building._id %>/<%= obj.room %>'"><span class="fa fa-plus text-white"></span></th>
                                 <%}else{%>
-                                  <th> <%= obj.details %></th>
-                                  <th><%= obj.room %></th>
-                                  <th><%= obj.room %></th>
+                                  <th> <%= obj.details.name %></th>
+                                  <th><%= obj.seen %></th>
                                   <td class="cursor-pointer bg-danger text-center">
                                     <form action="/building/<%= building._id %>?_method=DELETE" method="POST">
                                     <button type="submit" class="fa fa-ban text-white bg-none">

@@ -39,12 +39,12 @@
                                     <div class="p-5">
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">New Resident</h1>
-                                            <%= id %>
+                 
                                         </div>
                                         <form action="/createResident" method="POST" class="user">
                                             <div class="form-group">
                                                 <input type="text" class="form-control form-control-user"
-                                                    placeholder="Building Name" name="name" required="true">
+                                                    placeholder="Resident Name" name="name" required="true">
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" class="form-control form-control-user"  placeholder="Date of birth" name="dob" required="true">
@@ -53,12 +53,16 @@
                                                 <input type="number" class="form-control form-control-user" placeholder="Contact" name="contact" required="true" max="99">
                                             </div>
                                             <div class="form-group">
-                                                <input type="number" class="form-control form-control-user" placeholder="Additional information" name="info" required="true" max="10">
+                                                <input type="text" class="form-control form-control-user" placeholder="Additional information" name="info" required="true" max="10">
                                             </div>
+                                          
+                                            <input type="hidden" name="building" value="<%= building._id %>">
+                                            <input type="hidden" name="roomnumber" value="<%= room %>">
                                             <button type="submit" id="update-btn" class="btn btn-facebook btn-user btn-block">
                                                 <i class="fa fa-login"></i> Submit
+
                                             </button>
-                                        </form>
+                                        </form>               
                                     </div>
                                 </div>
                             </div>

@@ -40,18 +40,26 @@
             })
         }
 
-        viewBuilding(req, res){
+        async viewBuilding(req, res){
             const id = req.params.id
-            const Building = req.models.Building
-            Building.findById(id, (err, building) => {
-                if(err){
-                    res.status(400).send(err)
-                }else{
-                    let rooms = building.rooms
-                    res.render('building.ejs', {rooms, building})
+            const BuildingMODEL = req.models.Building
+            const building = await BuildingMODEL.findById(id).populate({
+                path: 'rooms',
+                populate: [{
+                 path: 'details',
+                 model: 'Resident'
+                }]
+             }).exec()
+                try {
+                    const rooms = await building.rooms
+                    res.render('building.ejs', {rooms, building})  
+                } catch (error) {
+                    
                 }
-            })
-        }
+                    
+            }
+                    
+            
 
         buildingRemove(req, res){
                 const id = req.params.id
@@ -101,21 +109,42 @@
             
         newResident(req, res){
             const id = req.params.id
-            console.log(id)
-            res.render("newResident.ejs", {id: id})
-            }
-        //     const id = req.params.id
-        //     const Building = req.models.Building
-        //     Building.findById(id, (err, building) => {
-        //         if(err){
-        //             res.status(400).send(err)
-        //         }else{
-        //             console.log(id)
-        //             res.render('newResident.ejs', {id, building})
-        //         }
-        //     })
-        // }
+            const roomnumber = req.params.roomNumber
+            const Building = req.models.Building
+            
+            Building.findById(id, (err, building) => {
+                if(err){
+                    res.status(400).send(err)
+                }else{
+                    console.log(building.rooms.room)
+                    res.render('newResident.ejs', {building, room: roomnumber})
+                }
+            })
+        }
 
+        async createResident (req, res){
+            const Resident = req.models.Resident
+            const BuildingMODEL = req.models.Building
+
+            const buildingFound = await BuildingMODEL.findById(req.body.building).populate({
+                path: 'rooms',
+                populate: [{
+                 path: 'details',
+                 model: 'Resident'
+                }]
+             }).exec()
+
+            const person = await Resident.create(req.body)
+            const objIndex = await buildingFound.rooms.findIndex((obj => obj.room == person.roomnumber))
+            console.log(objIndex)
+            
+            buildingFound.rooms[objIndex].details = person
+            
+            await buildingFound.save()
+
+                    res.redirect(`/building/${req.body.building}`)
+                }
+            
 
 }
  
