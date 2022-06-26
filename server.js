@@ -68,7 +68,7 @@ const residentSchema = new mongoose.Schema({
     },
     roomnumber: Number,
     listed: Boolean,
-    seen: Boolean,
+    seen: [],
 }, {timestamps: true})
 
 

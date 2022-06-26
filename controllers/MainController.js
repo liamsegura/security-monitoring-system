@@ -125,6 +125,7 @@
         async createResident (req, res){
             const Resident = req.models.Resident
             const BuildingMODEL = req.models.Building
+            const date = new Date().toLocaleString()
 
             const buildingFound = await BuildingMODEL.findById(req.body.building).populate({
                 path: 'rooms',
@@ -134,12 +135,15 @@
                 }]
              }).exec()
 
+            
             const person = await Resident.create(req.body)
+            
             const objIndex = await buildingFound.rooms.findIndex((obj => obj.room == person.roomnumber))
             console.log(objIndex)
-            
+            person.seen.push(date)
+            console.log(person.seen)
             buildingFound.rooms[objIndex].details = person
-            
+            await person.save()
             await buildingFound.save()
 
                     res.redirect(`/building/${req.body.building}`)
