@@ -67,7 +67,8 @@ const residentSchema = new mongoose.Schema({
     },
     roomnumber: Number,
     seen: [],
-    listed: { type: Boolean, default: true }
+    listed: { type: Boolean, default: true },
+    checkout: String
 }, {timestamps: true})
 
 
@@ -125,6 +126,8 @@ MainRoutes.delete('/building/:id', mainController.buildingDestroy) // delete bui
 MainRoutes.get('/newResident/:id/:roomNumber', mainController.newResident) // view resident form
 MainRoutes.post('/createResident', mainController.createResident) // create resident from form
 MainRoutes.get('/resident/:id', mainController.viewResident) // view resident from building
+MainRoutes.get('/updateResident/:id', mainController.updateResident)//view update resident form
+MainRoutes.put('/residentUpdated/:id', mainController.residentUpdated)//put request updates residents data
 MainRoutes.put('/remove/:buildingID/:residentID', mainController.residentRemove) //remove resident onto buildings checkout list
 MainRoutes.get("/checkoutList/:id", mainController.removedResidents) // view removed residents 
 

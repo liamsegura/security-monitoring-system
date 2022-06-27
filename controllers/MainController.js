@@ -66,12 +66,14 @@
                     const rooms = await building.rooms
                     res.render('building.ejs', {rooms, building})  
                 } catch (error) {
-                    
+                    console.log(error)
                 }
                     
             }
-                    
-            
+        
+        
+
+        
         //removes building by changing listed to false
         buildingRemove(req, res){
                 const id = req.params.id
@@ -176,17 +178,30 @@
                         
                 }
 
-            complete(req, res){
+            //opens form to update resident
+            async updateResident(req, res){
                 const id = req.params.id
                 const Resident = req.models.Resident
-                Resident.findByIdAndUpdate(id, {
-                    $set: req.body
-                }, {new: true} .then(result => {
-                    console.log(result)
-                    res.json('Success')
-                }))
-                .catch(error => console.error(error))
+                const resident = await Resident.findById(id)
+                    try {
+                        console.log(resident)
+                        res.render('updateResident.ejs', {resident})
+                    } catch (error) {
+                        console.log(error)
+                        res.status(400).send(err)
+                    }
+            }
 
+            //sends updated data from form
+            async residentUpdated(req, res){
+                const id = req.params.id
+                const Resident = req.models.Resident
+                Resident.findByIdAndUpdate(id, {$set: req.body}, {new: true})
+                .then(result => {
+                    console.log(result)
+                    res.redirect(`/resident/${id}`)
+                })
+                .catch(error => console.error(error))
         }
 
 

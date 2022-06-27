@@ -37,7 +37,6 @@
                   <div class="card-body">
                     <h1 class="h3 mb-2 mb-4 pl-4 pt-4 text-gray-800"><%= resident.name %></h1>
                       <ul>
-
                         <li><strong> Room number:</strong> <%= resident.roomnumber %></li>
                         <li><strong>Date of birth:</strong> <%= resident.dob %></li>
                         <li><strong>Contact:</strong> <%= resident.contact %></li>
@@ -45,11 +44,13 @@
                         <li><strong>Building:</strong> <%= resident.building.name %></li>
                         <li><strong>Moved in:</strong> <%= resident.createdAt.toString().slice(0,15) %></li>
                         <li><strong>Last Seen:</strong> <%= resident.seen[0].slice(0, 17) %></li>
+                        <li><a href="/updateResident/<%= resident._id %>">Update resident</a></li>
                         <% if(resident.listed == true){%>
                         <li><a href="/building/<%= resident.building._id %>">back</a></li>
                         <%}else{%>
                           <li><a href="/checkoutList/<%= resident.building._id %>">back</a></li>
                         <%}%>
+                        
                       </ul>
                   </div>
               </div>
