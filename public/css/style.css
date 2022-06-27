@@ -38,3 +38,7 @@ button{
     border: none;
     outline:none!important;
 }
+
+.clickable {
+    cursor:pointer;
+ }
