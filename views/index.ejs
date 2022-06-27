@@ -47,6 +47,7 @@
                               </form>
                           </div>
                       </li>
+                   
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                   <tr>
@@ -58,10 +59,13 @@
                                   </tr>
                                 </thead>
                                 <tbody>
+                                  <% let buildingID = "" %>
+                                  <% let buildingName = "" %>
 
                                       <% buildings.forEach(building => { %>
                                           <% if( building.listed == true) { %>
-                                           
+                                           <% buildingID = building._id %>
+                                           <% buildingName = building.name %>
                                             <tr>
                                                 <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.name %></td>
                                                 <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.location %></td>
@@ -71,15 +75,15 @@
                                                    <!-- Button trigger modal -->
                                                   <a href="#" class="fa fa-ban text-white clickable" data-toggle="modal" data-target="#exampleModal"></a>
                                                 </td>
-                                            </tr>                                     
-                                              
-                                           
-                                          
+                                            </tr>    
+                                            <%}%>
+                                            <% }) %>                                  
                                     </tbody>
                             </table>
-                        </div>
-                    </div>
+                    </div>       
                 </div>
+              
+               
                 <!-- Modal -->
              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -91,21 +95,20 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    Are you sure you want to remove <%= building.name %>?
+                    Are you sure you want to remove <%= buildingName %>?
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form action="/building/remove/<%= building._id %>?_method=PUT" method="POST">
+                    <form action="/building/remove/<%= buildingID %>?_method=PUT" method="POST">
                       <button type="submit" class="btn btn-primary">Confirm</button>
-                  </form>
+                    </form>
                   </div>
                 </div>
               </div>
+             </div>  
             </div>
+          </div>
         </div>
-        <% } %>
-        <% }) %>
-            </div>
             <!-- /.container-fluid -->
              
         <!-- End of Main Content -->
@@ -113,5 +116,3 @@
 <%- include('partials/footer.ejs') %>
 
 
-
-</html>
