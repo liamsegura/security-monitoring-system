@@ -39,7 +39,7 @@
                         <li><strong>Capacity:</strong> <%= building.rooms.length %></li>
    
                         <li><strong>Staff:</strong> <%= building.staff %></li>
-                        <li><a href="/checkoutList/<%= building._id %>">Checkout List</a></li>
+                        <li><a href="/building/<%= building._id %>">back</a></li>
                       </ul>
                   </div>
               </div>
@@ -97,12 +97,13 @@
                                 <tr>
                                   <th class="text-center"><%= obj.roomnumber %></th>
                                   <th> <%= obj.name %></th>
-                                  <th><%= obj.updatedAt %></th>
-                                  <td class="cursor-pointer bg-danger text-center">
+                                  <th><%= obj.updatedAt.toString().slice(0,21) %></th>
+                                  <th></th>
+                                  <!-- <td class="cursor-pointer bg-danger text-center">
                                     <form action="#" method="POST">
                                       <button type="submit" class="fa fa-ban text-white bg-none"></button>
                                      </form>
-                                  </td>
+                                  </td> -->
                                 </tr>
                       
                                 
