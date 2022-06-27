@@ -49,7 +49,7 @@ button{
   .modal-dialog {
       z-index: 9999!important;
   }
-  .model{
+  .modal{
     position: absolute!important;
     height: 400px!important;
     z-index: 9999!important;
