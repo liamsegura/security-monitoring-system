@@ -71,31 +71,7 @@
                                                   <button type="button" class="fa fa-ban text-white" data-toggle="modal" data-target="#exampleModal"></button>
                                                 </td>
                                             </tr>                                     
-                                              <!-- Modal -->
-                                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                  <div class="modal-content">
-                                                    <div class="modal-header">
-                                                      <h5 class="modal-title" id="exampleModalLabel">Remove Building</h5>
-                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                      </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                      Are you sure you want to remove <%= building.name %>?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                      <form action="/building/remove/<%= building._id %>?_method=PUT" method="POST">
-                                                        <button type="submit">Confirm</button>
-                                                    </form>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                         
-                                          <% } %>
-                                      <% }) %>
+                                             
                                           
                                     </tbody>
                             </table>
@@ -110,3 +86,29 @@
         <!-- End of Main Content -->
 
 <%- include('partials/footer.ejs') %>
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Remove Building</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to remove <%= building.name %>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form action="/building/remove/<%= building._id %>?_method=PUT" method="POST">
+          <button type="submit">Confirm</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% } %>
+<% }) %>
