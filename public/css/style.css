@@ -48,5 +48,7 @@ button{
   }
   .modal-dialog {
       z-index: 9999;
-      max-height: 400px
+  }
+  .model{
+    position: absolute;
   }
