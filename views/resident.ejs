@@ -45,7 +45,11 @@
                         <li><strong>Building:</strong> <%= resident.building.name %></li>
                         <li><strong>Moved in:</strong> <%= resident.createdAt.toString().slice(0,15) %></li>
                         <li><strong>Last Seen:</strong> <%= resident.seen[0].slice(0, 17) %></li>
-                        
+                        <% if(resident.listed == true){%>
+                        <li><a href="/building/<%= resident.building._id %>">back</a></li>
+                        <%}else{%>
+                          <li><a href="/checkoutList/<%= resident.building._id %>">back</a></li>
+                        <%}%>
                       </ul>
                   </div>
               </div>

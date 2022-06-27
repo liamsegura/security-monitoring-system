@@ -94,7 +94,7 @@
 
                                <% checkedout.forEach(obj => { %>                         
                                
-                                <tr>
+                                <tr class="cursor-pointer"onClick="window.location ='/resident/<%= obj._id %>'">
                                   <th class="text-center"><%= obj.roomnumber %></th>
                                   <th> <%= obj.name %></th>
                                   <th><%= obj.updatedAt.toString().slice(0,21) %></th>
