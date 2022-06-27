@@ -161,6 +161,73 @@
                     }
                         
                 }
+
+            complete(req, res){
+                const id = req.params.id
+                const Resident = req.models.Resident
+                Resident.findByIdAndUpdate(id, {
+                    $set: req.body
+                }, {new: true} .then(result => {
+                    console.log(result)
+                    res.json('Success')
+                }))
+                .catch(error => console.error(error))
+
+        }
+
+            //callback
+        // residentRemove(req, res){
+        //     const residentID = req.params.residentID
+        //     const buildingID = req.params.buildingID
+        //     const Resident = req.models.Resident
+        //     const Building = req.models.Building
+        //     Resident.findByIdAndUpdate(residentID, {listed: false}, {new: true}, (err, resident) => {
+        //         if(err){
+        //             res.status(400).send(err)
+        //         }else{
+        //             const foundBuilding = Building.findById(buildingID)
+        //             // foundBuilding.checkout.push(residentID)
+        //             // foundBuilding.save()
+        //             console.log(foundBuilding.name)
+        //             res.redirect(`/building/${buildingID}`)
+        //         }
+        //     })
+           
+        // }
+
+          async residentRemove(req, res){
+            const residentID = req.params.residentID
+            const buildingID = req.params.buildingID
+            const Resident = req.models.Resident
+            const Building = req.models.Building
+            
+            await Resident.findByIdAndUpdate(residentID, {listed: false}, {new: true})
+            const foundBuilding = await Building.findById(buildingID)
+                    foundBuilding.checkout.push(residentID)
+                    foundBuilding.save()
+                    console.log(foundBuilding.checkout)
+                    res.redirect(`/building/${buildingID}`)
+                }
+          
+
+  
+        async removedResidents(req, res){
+            const id = req.params.id
+            const BuildingMODEL = req.models.Building
+            const building = await BuildingMODEL.findById(id).populate({
+                path: 'checkout',
+                model: 'Resident'
+             }).exec()
+           
+                try {
+                    const checkedout = await building.checkout
+                    res.render('checkoutList.ejs', {checkedout, building})  
+                } catch (error) {
+                    
+                }
+                    
+            }
+              
                             
 
 }

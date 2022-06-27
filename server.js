@@ -50,6 +50,7 @@ const buildingSchema = new mongoose.Schema({
         }
     }],
     staff: Number,
+    checkout:  [{}],
     listed: { type: Boolean, default: true }
 }, { timestamps: true })
 
@@ -67,8 +68,8 @@ const residentSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId, ref: "Building",
     },
     roomnumber: Number,
-    listed: Boolean,
     seen: [],
+    listed: { type: Boolean, default: true }
 }, {timestamps: true})
 
 
@@ -126,7 +127,8 @@ MainRoutes.delete('/building/:id', mainController.buildingDestroy)
 MainRoutes.get('/newResident/:id/:roomNumber', mainController.newResident)
 MainRoutes.post('/createResident', mainController.createResident)
 MainRoutes.get('/resident/:id', mainController.viewResident)
-
+MainRoutes.put('/remove/:buildingID/:residentID', mainController.residentRemove)
+MainRoutes.get("/checkoutList/:id", mainController.removedResidents)
 
 // *********************************
 // API Routes that Return JSON

@@ -30,21 +30,14 @@
 
                <!-- Begin Page Content -->
                <div class="container-fluid">
-                <% let emptyrooms = 0 %>
-                <!-- Page Heading -->
-                <% rooms.forEach(obj => { %>                         
-
-                  <% if (obj.details == null || obj.details == undefined){ %>
-                    <% emptyrooms += 1 %>
-                    <% } %>
-                <% }) %>
+    
                 <div class="card shadow mb-4">
                   <div class="card-body">
-                    <h1 class="h3 mb-2 mb-4 pl-4 pt-4 text-gray-800"><%= building.name %></h1>
+                    <h1 class="h3 mb-2 mb-4 pl-4 pt-4 text-gray-800"><%= building.name %> Checkout List</h1>
                       <ul>
                         <li><strong>Address:</strong> <%= building.address %>, <%= building.location %></li>
                         <li><strong>Capacity:</strong> <%= building.rooms.length %></li>
-                        <li><strong>Empty Rooms:</strong> <%= emptyrooms %></li>
+   
                         <li><strong>Staff:</strong> <%= building.staff %></li>
                         <li><a href="/checkoutList/<%= building._id %>">Checkout List</a></li>
                       </ul>
@@ -93,33 +86,25 @@
                                 <tr>
                                   <th class="text-center">Room</th>
                                   <th>Name</th>
-                                  <th>Last Seen</th>
+                                  <th>Checked out</th>
                                   <td></td>   
                                 </tr>
                               </thead>
                               <tbody>
 
-                               <% rooms.forEach(obj => { %>                         
+                               <% checkedout.forEach(obj => { %>                         
                                
-                                <% if (obj.details == null || obj.details == undefined || obj.details.listed == false ){ %>
                                 <tr>
-                                  <th class="text-center"><%= obj.room %></th>
-                                  <th class="font-weight-light" >Empty Room</th>
-                                  <th></th>
-                                  <th class="cursor-pointer bg-success text-center" onclick="window.location='/newResident/<%= building._id %>/<%= obj.room %>'"><span class="fa fa-plus text-white"></span></th>
-                                </tr>
-                                  <%}else{%>
-                                <tr class="cursor-pointer"onClick="window.location ='/resident/<%= obj.details._id %>'">
-                                  <th class="text-center"><%= obj.room %></th>
-                                  <th> <%= obj.details.name %></th>
-                                  <th><%= obj.details.seen %></th>
+                                  <th class="text-center"><%= obj.roomnumber %></th>
+                                  <th> <%= obj.name %></th>
+                                  <th><%= obj.updatedAt %></th>
                                   <td class="cursor-pointer bg-danger text-center">
-                                    <form action="/remove/<%=building._id%>/<%= obj.details._id %>?_method=PUT" method="POST">
+                                    <form action="#" method="POST">
                                       <button type="submit" class="fa fa-ban text-white bg-none"></button>
                                      </form>
                                   </td>
                                 </tr>
-                                 <%}%>
+                      
                                 
                             
                                
