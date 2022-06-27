@@ -44,12 +44,16 @@ button{
  }
 
  .modal-backdrop {
-    z-index: -1;
+    z-index: -1!important;
   }
   .modal-dialog {
-      z-index: 9999;
+      z-index: 9999!important;
   }
   .model{
-    position: absolute;
-    height: 400px;
+    position: absolute!important;
+    height: 400px!important;
+    z-index: 9999!important;
+  }
+  .modal-content{
+      z-index: 9999!important;
   }
