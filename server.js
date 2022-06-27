@@ -38,7 +38,6 @@ mongoose.connection
 // *********************************
 
 //Building
-
 const buildingSchema = new mongoose.Schema({
     name: String,
     location: String,
@@ -58,7 +57,6 @@ const buildingSchema = new mongoose.Schema({
 const Building = mongoose.model('Building', buildingSchema)
 
 //Resident 
-
 const residentSchema = new mongoose.Schema({
     name: String,
     dob: String,
@@ -98,7 +96,7 @@ app.use(express.json())
 app.use(methodOverride("_method"))
 app.use(express.static('public'))
 app.use(morgan("tiny"))
-//use models on all routes
+//use models on all routes, accessable from mainController
 app.use((req, res, next) => {
     req.models = {
         Building,
@@ -115,20 +113,20 @@ APIRoutes.use(cors())
 // Routes that Render Pages with EJS
 // *********************************
 MainRoutes.get("/", mainController.index) // "/"
-MainRoutes.get("/newBuilding", mainController.newBuilding)
-MainRoutes.post('/createBuilding', mainController.createBuilding)
-MainRoutes.get('/building/:id', mainController.viewBuilding)
-MainRoutes.put('/building/remove/:id', mainController.buildingRemove)
-MainRoutes.get("/removedBuildings", mainController.removedBuildings)
-MainRoutes.delete('/building/:id', mainController.buildingDestroy)
+MainRoutes.get("/newBuilding", mainController.newBuilding) // new building form
+MainRoutes.post('/createBuilding', mainController.createBuilding) // create building from form
+MainRoutes.get('/building/:id', mainController.viewBuilding) // view building from /
+MainRoutes.put('/building/remove/:id', mainController.buildingRemove) // remove building onto removed site list
+MainRoutes.get("/removedBuildings", mainController.removedBuildings) // view removed buildings
+MainRoutes.delete('/building/:id', mainController.buildingDestroy) // delete buildings from db
 
 
 //Resident Routes
-MainRoutes.get('/newResident/:id/:roomNumber', mainController.newResident)
-MainRoutes.post('/createResident', mainController.createResident)
-MainRoutes.get('/resident/:id', mainController.viewResident)
-MainRoutes.put('/remove/:buildingID/:residentID', mainController.residentRemove)
-MainRoutes.get("/checkoutList/:id", mainController.removedResidents)
+MainRoutes.get('/newResident/:id/:roomNumber', mainController.newResident) // view resident form
+MainRoutes.post('/createResident', mainController.createResident) // create resident from form
+MainRoutes.get('/resident/:id', mainController.viewResident) // view resident from building
+MainRoutes.put('/remove/:buildingID/:residentID', mainController.residentRemove) //remove resident onto buildings checkout list
+MainRoutes.get("/checkoutList/:id", mainController.removedResidents) // view removed residents 
 
 // *********************************
 // API Routes that Return JSON
