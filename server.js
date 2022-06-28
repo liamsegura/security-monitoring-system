@@ -128,6 +128,7 @@ MainRoutes.delete('/building/:id', mainController.buildingDestroy) // delete bui
 MainRoutes.get('/newResident/:id/:roomNumber', mainController.newResident) // view resident form
 MainRoutes.post('/createResident', mainController.createResident) // create resident from form
 MainRoutes.get('/resident/:id', mainController.viewResident) // view resident from building
+MainRoutes.put('/seen/:buildingID/:residentID', mainController.residentSeen) // pushes timestamp into seen list
 MainRoutes.get('/updateResident/:id', mainController.updateResident)//view update resident form
 MainRoutes.put('/residentUpdated/:id', mainController.residentUpdated)//put request updates residents data
 MainRoutes.put('/remove/:buildingID/:residentID', mainController.residentRemove) //remove resident onto buildings checkout list

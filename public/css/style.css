@@ -58,3 +58,7 @@ button{
       z-index: 9999!important;
       padding: 1rem!important;
   }
+
+  .smallfont{
+      font-size: 12px;
+  }

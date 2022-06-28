@@ -104,11 +104,13 @@
                                 </tr>
                               </thead>
                               <tbody>
+                                <% resident.seen.forEach(time => { %>
                                 <tr>
-                                  <th><%= resident.seen[0].slice(0,10) %></th>
-                                  <th><%= resident.seen[0].slice(12).slice(0, 5) %></th>                                 
+                                  <th><%= time %></th>
+                                  <th>IN</th>                                 
                                 </tr>
                               </tbody>
+                              <%})%>
 
                           </table>
                       </div>

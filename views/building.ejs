@@ -117,7 +117,7 @@
                                 <tr>
                                   <th class="text-center cursor-pointer"onClick="window.location='/resident/<%= obj.details._id %>'"><%= obj.room %></th>
                                   <th class="cursor-pointer"onClick="window.location='/resident/<%= obj.details._id %>'"> <%= obj.details.name %></th>
-                                  <th class="cursor-pointer"onClick="window.location='/resident/<%= obj.details._id %>'"><%= obj.details.seen %></th>
+                                  <th><form action="/seen/<%= building._id %>/<%= residentID %>?_method=PUT"" method="POST"><button class="p-0 mr-2 fs-6"  type="submit">OUT</button><span class="smallfont"><%= obj.details.seen[obj.details.seen.length -1]%></span></form></th>
                                   <td class="cursor-pointer bg-danger text-center" class="clickable" data-toggle="modal" data-target="#exampleModal">
                                     <i class="fa fa-ban text-white"></i>
                                   </td>                                        
