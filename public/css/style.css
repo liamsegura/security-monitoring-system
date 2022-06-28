@@ -14,8 +14,8 @@ li{
         font-size:16px;
     }
     .table td, .table th{
-        padding: 0.2rem;
-        padding-left: 0.3rem;
+        padding: 0.1rem;
+    padding-left: 0.1rem;
     }
     .card-body{
         padding: 0.5rem;
@@ -34,9 +34,12 @@ li{
 }
 
 button{
-    padding: 0.5rem 1rem ;
+    padding: 0px 6px!important;
     border: none;
     outline:none!important;
+    border-radius: 5px;
+    background-color: #cacce0;
+    color: rgb(37, 34, 34);
 }
 
 .clickable {

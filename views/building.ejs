@@ -94,8 +94,8 @@
                                 <tr>
                                   <th class="text-center">Room</th>
                                   <th>Name</th>
-                                  <th>Last Seen</th>
-                                  <th class="smallfont">IN/OUT</th>
+                                  <th class="mediumfont">IN / OUT</th>
+                                  <th>Last Seen</th>                                 
                                   <td></td>   
                                 </tr>
                               </thead>
@@ -120,12 +120,12 @@
                                   <th class="text-center cursor-pointer"onClick="window.location='/resident/<%= obj.details._id %>'"><%= obj.room %></th>
                                   <th class="cursor-pointer"onClick="window.location='/resident/<%= obj.details._id %>'"> <%= obj.details.name %></th>
                                   <th>
-                                    <form action="/seen/<%= building._id %>/<%= residentID %>?_method=PUT"" method="POST">
-                                      <button class="p-0 mr-2 fs-6" type="submit" name="seenBtn" value="IN">IN</button><button class="p-0 mr-2 fs-6" type="submit" name="seenBtn" value="OUT">OUT</button>
-                                      <span class="smallfont"><%= obj.details.seen[obj.details.seen.length -1].seenTime.slice(11, 17)%></span>
+                                    <form action="/seen/<%= building._id %>/<%= residentID %>?_method=PUT"" method="POST" class="d-flex justify-content-around">
+                                      <button class="fs-6" type="submit" name="seenBtn" value="IN"><span>IN</span></button><button class="fs-6" type="submit" name="seenBtn" value="OUT"><span>OUT</span></button>
+                                      
                                     </form>
                                   </th>
-                                  <th class="text-center"> <span><%= obj.details.seen[obj.details.seen.length -1].currentlySeen%></span></th>
+                                  <th class="text-center"> <span><%= obj.details.seen[obj.details.seen.length -1].seenTime.slice(11, 17)%></span> - <span><%= obj.details.seen[obj.details.seen.length -1].currentlySeen%></span></th>
                                   <td class="cursor-pointer bg-danger text-center" class="clickable" data-toggle="modal" data-target="#exampleModal">
                                     <i class="fa fa-ban text-white"></i>
                                   </td>                                        
