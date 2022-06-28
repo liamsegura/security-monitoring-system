@@ -193,7 +193,7 @@
             const Resident = req.models.Resident
             const BuildingMODEL = req.models.Building
             //date
-            const date = new Date().toLocaleString()
+            const date = new Date().toLocaleString('en-GB', {timeZone: 'Europe/London'})
 
             //finds and populates room property on the relating building
             const buildingFound = await BuildingMODEL.findById(req.body.building).populate({
@@ -212,7 +212,7 @@
             const objIndex = await buildingFound.rooms.findIndex((obj => obj.room == person.roomnumber))
             console.log(objIndex)
             //adds time stamp for seen to new resident
-            person.seen.push(date)
+            person.seen.push({currentlySeen: "IN", seenTime: date})
             console.log(person.seen)
             //assigns the resident to the room corresponding with the index variable 
             buildingFound.rooms[objIndex].details = person
@@ -242,12 +242,19 @@
             async residentSeen(req, res){
                 const buildingID = req.params.buildingID
                 const residentID = req.params.residentID
-                const Resident = req.models.Resident
-            
+                const Resident = req.models.Resident    
                 const date = new Date().toLocaleString('en-GB', {timeZone: 'Europe/London'})
                 
+                const wasSeen = req.body.seenBtn
+
                 // function addId(id, array) { if (array.length === 5) { array.pop(); } array.splice(0, 0, id); return array; } 
-                const foundResident = await Resident.findByIdAndUpdate(residentID, { $push: { seen: date }}, {new: true})
+                const foundResident = await Resident.findByIdAndUpdate(residentID, 
+                    { $push: { 
+                        seen: {
+                              currentlySeen: wasSeen, seenTime: date, 
+                            }
+                        }
+                    }, {new: true})
                 try{
                     console.log(foundResident)
                     res.redirect(`/building/${buildingID}`)

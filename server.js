@@ -66,7 +66,10 @@ const residentSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId, ref: "Building",
     },
     roomnumber: Number,
-    seen: [],
+    seen: [{
+        currentlySeen: String,
+        seenTime: String,
+    }],
     listed: { type: Boolean, default: true },
     checkout: String
 }, {timestamps: true})

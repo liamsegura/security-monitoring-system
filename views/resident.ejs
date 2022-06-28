@@ -43,7 +43,7 @@
                         <li><strong>Addition Infomation:</strong> <%= resident.info %></li>
                         <li><strong>Building:</strong> <%= resident.building.name %></li>
                         <li><strong>Moved in:</strong> <%= resident.createdAt.toString().slice(0,15) %></li>
-                        <li><strong>Last Seen:</strong> <%= resident.seen.reverse()[0].slice(0, 17) %></li>
+                        <li><strong>Last Seen:</strong> <%= resident.seen[resident.seen.length -1].seenTime.slice(0, 17)%></li>
                         <li><a href="/updateResident/<%= resident._id %>">Update resident</a></li>
                         <% if(resident.listed == true){%>
                         <li><a href="/building/<%= resident.building._id %>">back</a></li>
@@ -88,15 +88,12 @@
                                               <i class="fas fa-search fa-sm"></i>
                                           </button>
                                       </div>
-                                      
                                   </div>
                               </form>
-                
                           </div>
                       </li>
-                     
                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            
+
                               <thead>
                                 <tr>
                                   <th>Seen</th>
@@ -104,10 +101,10 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <% resident.seen.forEach(time => { %>
+                                <% resident.seen.reverse().forEach(time => { %>
                                 <tr>
-                                  <th><%= time.slice(0, 17) %></th>
-                                  <th>IN</th>                                 
+                                  <th><%= time.seenTime %></th>
+                                  <th><%= time.currentlySeen %></th>                                 
                                 </tr>
                               </tbody>
                               <%})%>
