@@ -121,7 +121,7 @@
                                   <th class="cursor-pointer"onClick="window.location='/resident/<%= obj.details._id %>'"> <%= obj.details.name %></th>
                                   <th>
                                     <form action="/seen/<%= building._id %>/<%= residentID %>?_method=PUT"" method="POST" class="d-flex justify-content-around">
-                                      <button class="fs-6" type="submit" name="seenBtn" value="IN"><span>IN</span></button><button class="fs-6" type="submit" name="seenBtn" value="OUT"><span>OUT</span></button>
+                                      <button class="fs-6 in-out" type="submit" name="seenBtn" value="IN"><span>IN</span></button><button class="in-out fs-6" type="submit" name="seenBtn" value="OUT"><span>OUT</span></button>
                                       
                                     </form>
                                   </th>
