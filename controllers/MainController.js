@@ -239,22 +239,22 @@
 
 
 //sends updated data from form
-async residentSeen(req, res){
-    const buildingID = req.params.buildingID
-    const residentID = req.params.residentID
-    const Resident = req.models.Resident
-
-    const date = new Date().toLocaleString()
-
-
-    const foundResident = await Resident.findByIdAndUpdate(residentID, { $push: { seen: date }}, {new: true})
-    try{
-        console.log(foundResident)
-        res.redirect(`/building/${buildingID}`)
-    
-    }catch{
-        error => console.error(error)
-    }}
+            async residentSeen(req, res){
+                const buildingID = req.params.buildingID
+                const residentID = req.params.residentID
+                const Resident = req.models.Resident
+            
+                const date = new Date().toLocaleString('en-GB', {timeZone: 'Europe/London'})
+                
+                // function addId(id, array) { if (array.length === 5) { array.pop(); } array.splice(0, 0, id); return array; } 
+                const foundResident = await Resident.findByIdAndUpdate(residentID, { $push: { seen: date }}, {new: true})
+                try{
+                    console.log(foundResident)
+                    res.redirect(`/building/${buildingID}`)
+                
+                }catch{
+                    error => console.error(error)
+                }}
  
 //opens form to update resident
             async updateResident(req, res){

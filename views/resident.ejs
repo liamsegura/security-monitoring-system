@@ -43,7 +43,7 @@
                         <li><strong>Addition Infomation:</strong> <%= resident.info %></li>
                         <li><strong>Building:</strong> <%= resident.building.name %></li>
                         <li><strong>Moved in:</strong> <%= resident.createdAt.toString().slice(0,15) %></li>
-                        <li><strong>Last Seen:</strong> <%= resident.seen[0].slice(0, 17) %></li>
+                        <li><strong>Last Seen:</strong> <%= resident.seen.reverse()[0].slice(0, 17) %></li>
                         <li><a href="/updateResident/<%= resident._id %>">Update resident</a></li>
                         <% if(resident.listed == true){%>
                         <li><a href="/building/<%= resident.building._id %>">back</a></li>
@@ -99,14 +99,14 @@
                             
                               <thead>
                                 <tr>
-                                  <th>Date</th>
-                                  <th>Time</th>                                 
+                                  <th>Seen</th>
+                                  <th>IN / OUT</th>                                 
                                 </tr>
                               </thead>
                               <tbody>
-                                <% resident.seen.forEach(time => { %>
+                                <% resident.seen.reverse().forEach(time => { %>
                                 <tr>
-                                  <th><%= time %></th>
+                                  <th><%= time.slice(0, 17) %></th>
                                   <th>IN</th>                                 
                                 </tr>
                               </tbody>
