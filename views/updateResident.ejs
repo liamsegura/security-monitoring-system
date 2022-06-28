@@ -43,16 +43,20 @@
                                         </div>
                                         <form action="/residentUpdated/<%= resident._id %>?_method=PUT" method="POST" class="user">
                                             <div class="form-group">
+                                                <span class="ml-3">Name</span>
                                                 <input type="text" class="form-control form-control-user"
                                                     placeholder="Full name" name="name" required="true" value="<%= resident.name %>">
                                             </div>
                                             <div class="form-group">
+                                                <span class="ml-3">Date of birth</span>
                                                 <input type="text" class="form-control form-control-user"  placeholder="Date of birth" name="dob" required="true"  value="<%= resident.dob %>">
                                             </div>
                                             <div class="form-group">
+                                                <span class="ml-3">Contact number</span>
                                                 <input type="number" class="form-control form-control-user" placeholder="Contact number" name="contact" required="true"  value="<%= resident.contact %>">
                                             </div>
                                             <div class="form-group">
+                                                <span class="ml-3">Additional infomation</span>
                                                 <textarea type="text" class="form-control form-control-user" placeholder="Additional information" name="info" required="true" max="10"><%= resident.info %></textarea>
                                             </div>
         

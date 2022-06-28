@@ -117,6 +117,8 @@ MainRoutes.get("/", mainController.index) // "/"
 MainRoutes.get("/newBuilding", mainController.newBuilding) // new building form
 MainRoutes.post('/createBuilding', mainController.createBuilding) // create building from form
 MainRoutes.get('/building/:id', mainController.viewBuilding) // view building from /
+MainRoutes.get('/updateBuilding/:id', mainController.updateBuilding)//view update building form
+MainRoutes.put('/buildingUpdated/:id', mainController.buildingUpdated)//put request updates building data
 MainRoutes.put('/building/remove/:id', mainController.buildingRemove) // remove building onto removed site list
 MainRoutes.get("/removedBuildings", mainController.removedBuildings) // view removed buildings
 MainRoutes.delete('/building/:id', mainController.buildingDestroy) // delete buildings from db

@@ -1,8 +1,10 @@
     class MainController {
         
-        //Building
+    // *********************************
+    // BUILDING CONTROLLERS
+    // *********************************
 
-        //view dashboard and render buildings
+//view dashboard and render buildings
         index(req, res){
             const Building = req.models.Building
             Building.find({}, (err, buildings) => {
@@ -19,7 +21,7 @@
             res.render("newBuilding.ejs")
         }
 
-        //create building from form
+//create building from form
         createBuilding (req, res){
             //global model from server
             const Building = req.models.Building
@@ -43,11 +45,12 @@
                     res.status(400).send(err)
                 }else{
                     res.redirect('/')
+                    res.render('partials/navSection.ejs', {test: req.body})
                 }
             })
         }
 
-        //view building on click
+//view building on click
         async viewBuilding(req, res){
             //takes param for building id
             const id = req.params.id
@@ -71,10 +74,35 @@
                     
             }
         
-        
+//opens form to update building
+        async updateBuilding(req, res){
+            const id = req.params.id
+            const Building = req.models.Building
+            const building = await Building.findById(id)
+                try {
+                    console.log(building)
+                    res.render('updateBuilding.ejs', {building})
+                } catch (error) {
+                    console.log(error)
+                    res.status(400).send(err)
+                }
+        }   
+
+//sends updated data from form
+         async buildingUpdated(req, res){
+            const id = req.params.id
+            const Building = req.models.Building
+
+            Building.findByIdAndUpdate(id, {$set: req.body}, {new: true})
+            .then(result => {
+                console.log(result)
+                res.redirect(`/building/${id}`)
+            })
+            .catch(error => console.error(error))
+        }
 
         
-        //removes building by changing listed to false
+//removes building by changing listed to false
         buildingRemove(req, res){
                 const id = req.params.id
                 const Building = req.models.Building
@@ -87,7 +115,7 @@
                 })
             }
 
-        //views buildings that are listed as false
+//views buildings that are listed as false
         removedBuildings(req, res){
             const Building = req.models.Building
             Building.find({}, (err, buildings) => {
@@ -99,20 +127,51 @@
             })
         }
 
-        //deletes buildings from removed buildings list. deletes from db
-        buildingDestroy(req, res){
+//deletes buildings from removed buildings list. deletes from db
+        async buildingDestroy(req, res){
             const id = req.params.id
             const Building = req.models.Building
+            const Resident = req.models.Resident
+
+//finds building and delete
+            //empty arr to push resident ids from building propertie
+            const residentIds = []
+            const buildingId = await Building.findById(id).populate({
+                path: 'rooms',
+                populate: [{
+                 path: 'details',
+                 model: 'Resident'
+                }]
+             }).exec()
+
+             //for each loop to loop through the rooms that have _ids and pushes them up
+            await buildingId.rooms.forEach(room => {
+                 if(room.details !== null){
+                 residentIds.push(room.details._id)
+                 }
+             })
+            console.log(residentIds)
+
+            //deletes all of the ids from the resident db that were relational to the deleted building
+            await Resident.deleteMany({_id:{$in:residentIds}})
+
             Building.findByIdAndDelete(id, (err, buildings) => {
-                if(err){
-                    res.status(400).send(err)
-                }else{
+                try{
                     res.redirect('/removedBuildings')
+                }catch(err){
+                    res.status(400).send(err)
                 }
             })
-        }
+         }
         
-        //new resident form, takes params to assign to the newly created resident    
+
+
+    // *********************************
+    // BUILDING CONTROLLERS
+    // *********************************
+
+
+//new resident form, takes params to assign to the newly created resident    
         newResident(req, res){
             const id = req.params.id
             const roomnumber = req.params.roomNumber
@@ -128,7 +187,7 @@
             })
         }
 
-        //creates a resident, and pushes the data into the relating buildings room array
+//creates a resident, and pushes the data into the relating buildings room array
         async createResident (req, res){
             //global models
             const Resident = req.models.Resident
@@ -165,7 +224,7 @@
                 }
             
 
-            //views resident
+//views resident
             async viewResident(req, res){
                 const id = req.params.id
                 const residentModel = req.models.Resident
@@ -178,7 +237,7 @@
                         
                 }
 
-            //opens form to update resident
+//opens form to update resident
             async updateResident(req, res){
                 const id = req.params.id
                 const Resident = req.models.Resident
@@ -192,7 +251,7 @@
                     }
             }
 
-            //sends updated data from form
+//sends updated data from form
             async residentUpdated(req, res){
                 const id = req.params.id
                 const Resident = req.models.Resident
@@ -205,7 +264,7 @@
         }
 
 
-        //removes resident from building list and onto checkout list
+ //removes resident from building list and onto checkout list
         async residentRemove(req, res){
             //gets params
             const residentID = req.params.residentID
@@ -215,7 +274,7 @@
             const Building = req.models.Building
             
             //finds resident and updates listed to false, so it isn't viewable on the building page
-            await Resident.findByIdAndUpdate(residentID, {listed: false}, {new: true})
+            await Resident.findByIdAndUpdate(residentID, {listed: false, checkout: req.body.checkout}, {new: true})
             //finds building
             const foundBuilding = await Building.findById(buildingID)
                     //pushes resident id into checkout array,saves then redirects back to building
@@ -226,7 +285,7 @@
                 }
             
 
-        //views checkout page
+//views checkout page
         async removedResidents(req, res){
             //building param
             const id = req.params.id
@@ -248,6 +307,10 @@
             }
               
                             
+
+
+
+
 
 }
  

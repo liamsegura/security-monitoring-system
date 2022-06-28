@@ -87,7 +87,7 @@
                                   <th class="text-center">Room</th>
                                   <th>Name</th>
                                   <th>Checked out</th>
-                                  <td></td>   
+                                  <th>Reason</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -98,7 +98,7 @@
                                   <th class="text-center"><%= obj.roomnumber %></th>
                                   <th> <%= obj.name %></th>
                                   <th><%= obj.updatedAt.toString().slice(0,21) %></th>
-                                  <th></th>
+                                  <th><%= obj.checkout %></th>
                                   <!-- <td class="cursor-pointer bg-danger text-center">
                                     <form action="#" method="POST">
                                       <button type="submit" class="fa fa-ban text-white bg-none"></button>
