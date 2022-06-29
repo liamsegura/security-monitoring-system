@@ -54,7 +54,7 @@
                                     <th>Site</th>
                                     <th>Location</th>
                                     <th>Rooms</th>
-                                    <th>Staff</th>
+                                   
                                     <th class="cursor-pointer bg-success text-center" onclick="window.location='/newBuilding'"><span class="fa fa-plus text-white"></span></th>
                                   </tr>
                                 </thead>
@@ -67,7 +67,7 @@
                                                 <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.name %></td>
                                                 <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.location %></td>
                                                 <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.rooms.length %></td>
-                                                <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.staff %></td>
+                                              
                                                 <td class="cursor-pointer bg-danger text-center" class="clickable" data-toggle="modal" data-target="#exampleModal<%=building._id%>">
                                                   <i class="fa fa-ban text-white" ></i>
                                                 </td>
