@@ -32,7 +32,7 @@ li{
         float: none;
         }
     .table-responsive{
-        min-height: 90vh!important;
+
     }
 }
 
@@ -70,5 +70,5 @@ li{
   }
 
   .table-responsive{
-      overflow-y: visible!important;
+      overflow: visible!important;
   }
