@@ -9,13 +9,13 @@ li{
    list-style: none;
 }
 
-@media (max-width: 576px){
+@media (max-width: 476px){
     body{
         font-size:16px;
     }
     .table td, .table th{
         padding: 0.5rem;
-
+        font-size: 12px;
     }
     .card-body{
         padding: 0.5rem;
@@ -33,6 +33,14 @@ li{
         }
     .table-responsive{
 
+    }
+}
+
+
+@media (max-width: 345px){
+    .table td, .table th{
+        padding: 0.5rem;
+        font-size: 10px;
     }
 }
 
