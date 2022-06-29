@@ -19,7 +19,6 @@ li{
     }
     .card-body{
         padding: 0.5rem;
-        min-height: 90vh!important;
     }
     .container-fluid{
         padding-left: 0.4rem;
@@ -32,6 +31,9 @@ li{
         position: absolute;
         float: none;
         }
+    .table-responsive{
+        min-height: 90vh!important;
+    }
 }
 
 .in-out{
