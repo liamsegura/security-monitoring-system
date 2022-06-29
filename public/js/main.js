@@ -1,11 +1,11 @@
 
-const fetchResident = document.querySelector(".fetch-resident")
+// const fetchResident = document.querySelector(".fetch-resident")
 
-fetchResident.addEventListener('click', () => {
+// fetchResident.addEventListener('click', () => {
 
-    const id = fetchResident.getAttribute('data-attribute')
+//     const id = fetchResident.getAttribute('data-attribute')
 
-    console.log(id)
+//     console.log(id)
 
   //   fetch(`/getResidentID${id}`)
   //   .then(res => res.json()) // parse response as JSON
@@ -23,7 +23,7 @@ fetchResident.addEventListener('click', () => {
   //       console.log(`error ${err}`)
   //  });
   
-  })
+  // })
 
 
 

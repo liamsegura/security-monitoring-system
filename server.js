@@ -49,6 +49,7 @@ const buildingSchema = new mongoose.Schema({
         }
     }],
     staff: Number,
+    client: String,
     checkout:  [{}],
     listed: { type: Boolean, default: true }
 }, { timestamps: true })

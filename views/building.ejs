@@ -30,6 +30,7 @@
 
                <!-- Begin Page Content -->
                <div class="container-fluid">
+                <a clas="mb-2" href="/">Dashboard</a>
                 <% let emptyrooms = 0 %>
                 <!-- Page Heading -->
                 <% rooms.forEach(obj => { %>                         
@@ -46,6 +47,7 @@
                         <li><strong>Capacity:</strong> <%= building.rooms.length %></li>
                         <li><strong>Empty Rooms:</strong> <%= emptyrooms %></li>
                         <li><strong>Staff:</strong> <%= building.staff %></li>
+                        <li><strong>Client:</strong> <%= building.client %></li>
                         <li><a href="/updateBuilding/<%= building._id %>">Update building</a></li>
                         <li><a href="/checkoutList/<%= building._id %>">Checkout List</a></li>
                       </ul>
@@ -156,7 +158,7 @@
 
                           </table>
                       </div>
-                      <a href="/">Dashboard</a>
+                      
                   </div>
               </div>
              
