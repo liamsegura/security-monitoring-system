@@ -5,20 +5,29 @@
     // *********************************
 
 //view dashboard and render buildings
-        index(req, res){
+        async index(req, res){
             const Building = req.models.Building
+            const Resident = req.models.Resident
+            const UpdateMODEL = req.models.Update
+            const update = await UpdateMODEL.find({})
+
+
             Building.find({}, (err, buildings) => {
                 if(err){
                 res.status(400).send(err)
                 }else{
-                    res.render('index.ejs', {buildings})
-                }
-            })
-        }
+                    res.render('index.ejs', {buildings, update})
+                 }
+             })
+            }
 
         //view new building form
-        newBuilding(req, res){
-            res.render("newBuilding.ejs")
+        async newBuilding(req, res){
+            const Change = req.change
+            const UpdateMODEL = req.models.Update
+            const update = await UpdateMODEL.find({})
+
+            res.render("newBuilding.ejs", {Change, update})
         }
 
 //create building from form
@@ -45,7 +54,6 @@
                     res.status(400).send(err)
                 }else{
                     res.redirect('/')
-                    res.render('partials/navSection.ejs', {test: req.body})
                 }
             })
         }
@@ -56,6 +64,9 @@
             const id = req.params.id
             //assigns global building model
             const BuildingMODEL = req.models.Building
+            const UpdateMODEL = req.models.Update
+            const update = await UpdateMODEL.find({})
+
             //finds and populates the details property attached to rooms, using the resident model
             const building = await BuildingMODEL.findById(id).populate({
                 path: 'rooms',
@@ -67,7 +78,7 @@
              //renders the building with the building plus the room data
                 try {
                     const rooms = await building.rooms
-                    res.render('building.ejs', {rooms, building})  
+                    res.render('building.ejs', {rooms, building, update})  
                 } catch (error) {
                     console.log(error)
                 }
@@ -79,9 +90,11 @@
             const id = req.params.id
             const Building = req.models.Building
             const building = await Building.findById(id)
+            const UpdateMODEL = req.models.Update
+            const update = await UpdateMODEL.find({})
                 try {
                     console.log(building)
-                    res.render('updateBuilding.ejs', {building})
+                    res.render('updateBuilding.ejs', {building, update})
                 } catch (error) {
                     console.log(error)
                     res.status(400).send(err)
@@ -116,15 +129,17 @@
             }
 
 //views buildings that are listed as false
-        removedBuildings(req, res){
+            async removedBuildings(req, res){
             const Building = req.models.Building
-            Building.find({}, (err, buildings) => {
-                if(err){
-                res.status(400).send(err)
-                }else{
-                    res.render('removedBuildings.ejs', {buildings})
+            const UpdateMODEL = req.models.Update
+            const update = await UpdateMODEL.find({})
+
+            const findBuilding = await Building.find({})
+                try{
+                    res.render('removedBuildings.ejs', {findBuilding, update})
+                }catch(err){
+                    res.status(400).send(err) 
                 }
-            })
         }
 
 //deletes buildings from removed buildings list. deletes from db
@@ -172,17 +187,19 @@
 
 
 //new resident form, takes params to assign to the newly created resident    
-        newResident(req, res){
+        async newResident(req, res){
             const id = req.params.id
             const roomnumber = req.params.roomNumber
             const Building = req.models.Building
+            const UpdateMODEL = req.models.Update
+            const update = await UpdateMODEL.find({})
             
             Building.findById(id, (err, building) => {
                 if(err){
                     res.status(400).send(err)
                 }else{
                     console.log(building.rooms.room)
-                    res.render('newResident.ejs', {building, room: roomnumber})
+                    res.render('newResident.ejs', {building, room: roomnumber, update})
                 }
             })
         }
@@ -194,6 +211,8 @@
             const BuildingMODEL = req.models.Building
             //date
             const date = new Date().toLocaleString('en-GB', {timeZone: 'Europe/London'})
+            
+
 
             //finds and populates room property on the relating building
             const buildingFound = await BuildingMODEL.findById(req.body.building).populate({
@@ -219,8 +238,9 @@
             //saves and redirects back to the building
             await person.save()
             await buildingFound.save()
-
+                    
                     res.redirect(`/building/${req.body.building}`)
+                    
                 }
             
 
@@ -228,9 +248,12 @@
             async viewResident(req, res){
                 const id = req.params.id
                 const residentModel = req.models.Resident
+                const UpdateMODEL = req.models.Update
+                const update = await UpdateMODEL.find({})
+
                 const resident = await residentModel.findById(id).populate('building')
                     try {
-                        res.render('resident.ejs', {resident})  
+                        res.render('resident.ejs', {resident, update})  
                     } catch (error) {
                         console.log(error)
                     }
@@ -268,9 +291,12 @@
                 const id = req.params.id
                 const Resident = req.models.Resident
                 const resident = await Resident.findById(id)
+                const UpdateMODEL = req.models.Update
+                const update = await UpdateMODEL.find({})
+
                     try {
                         console.log(resident)
-                        res.render('updateResident.ejs', {resident})
+                        res.render('updateResident.ejs', {resident, update})
                     } catch (error) {
                         console.log(error)
                         res.status(400).send(err)
@@ -317,6 +343,10 @@
             const id = req.params.id
             //building global model
             const BuildingMODEL = req.models.Building
+            const UpdateMODEL = req.models.Update
+            const update = await UpdateMODEL.find({})
+           
+           
             //finds building by id and populates the checkout array using the Resident model
             const building = await BuildingMODEL.findById(id).populate({
                 path: 'checkout',
@@ -325,7 +355,7 @@
              //renders checkedout array and the building
                 try {
                     const checkedout = await building.checkout
-                    res.render('checkoutList.ejs', {checkedout, building})  
+                    res.render('checkoutList.ejs', {checkedout, building, update})  
                 } catch (error) {
                     
                 }
@@ -333,7 +363,20 @@
             }
               
                             
+            async updateNotif(req, res){
+                const Building = req.models.Building
+                const UpdateMODEL = req.models.Update
+                const update = await UpdateMODEL.find({})
 
+
+                Building.findById(data.documentKey._id, (err, data) => {
+                    if(err){
+                    res.status(400).send(err)
+                    }else{
+                        res.render('partials/navSection.ejs', {data, update})
+                    }
+                })
+            }
 
 
 

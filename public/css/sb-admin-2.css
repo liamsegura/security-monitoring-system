@@ -5645,7 +5645,7 @@ a.close.disabled {
 
 .modal-open .modal {
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: visible;
 }
 
 .modal {
@@ -5702,7 +5702,7 @@ a.close.disabled {
 }
 
 .modal-dialog-scrollable .modal-body {
-  overflow-y: auto;
+  overflow-y: visible;
 }
 
 .modal-dialog-centered {

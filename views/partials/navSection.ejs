@@ -243,19 +243,23 @@
                             <h6 class="dropdown-header">
                                 Message Center
                             </h6>
+                            <% update.slice(Math.max(update.length - 5, 0)).forEach(update => { %>
+                                <% if(typeof update == "object" && update){ %>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
                                     <img class="rounded-circle" src="/img/undraw_profile_1.svg"
                                         alt="...">
                                     <div class="status-indicator bg-success"></div>
                                 </div>
-                                <div class="font-weight-bold">
-                                    <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                        problem I've been having.</div>
+                                <div class="font-weight-bold">             
+                                    <div class="text-truncate"><%= update.type %></div>
                                     <div class="small text-gray-500">Emily Fowler · 58m</div>
                                 </div>
                             </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <% }else{%>
+                                <%}%>
+                            <%})%>
+                            <!-- <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
                                     <img class="rounded-circle" src="/img/undraw_profile_2.svg"
                                         alt="...">
@@ -290,7 +294,7 @@
                                         told me that people say this to all dogs, even if they aren't good...</div>
                                     <div class="small text-gray-500">Chicken the Dog · 2w</div>
                                 </div>
-                            </a>
+                            </a> -->
                             <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                         </div>
                     </li>

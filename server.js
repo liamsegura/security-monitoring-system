@@ -80,6 +80,27 @@ const residentSchema = new mongoose.Schema({
 const Resident = mongoose.model('Resident', residentSchema)
 
 
+//History Schema
+const updateSchema = new mongoose.Schema({
+   type: String,
+   update: String,
+}, {timestamps: true})
+
+const Update = mongoose.model('Update', updateSchema)
+
+
+Resident.watch().on("change", (data) => {
+       Resident.findById(data.documentKey._id, (err, resident) => {
+        if(err){
+            res.status(400).send(err)
+        }else{
+            Update.create({type: data.operationType, update: resident.name})
+        }
+    })
+})
+
+
+
 
 // *********************************
 // Creating Application Object
@@ -105,7 +126,8 @@ app.use(morgan("tiny"))
 app.use((req, res, next) => {
     req.models = {
         Building,
-        Resident
+        Resident,
+        Update
     }
     next()
 })
@@ -142,7 +164,8 @@ MainRoutes.get("/checkoutList/:id", mainController.removedResidents) // view rem
 // API Routes that Return JSON
 // *********************************
 APIRoutes.get("/", apiController.example) //"/api"
-APIRoutes.get("/todos", apiController.getTodos)
+
+
 
 
 // mongoose.connection.on('open', async () => {
