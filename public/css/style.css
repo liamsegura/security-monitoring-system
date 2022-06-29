@@ -19,6 +19,7 @@ li{
     }
     .card-body{
         padding: 0.5rem;
+        min-height: 90vh!important;
     }
     .container-fluid{
         padding-left: 0.4rem;
