@@ -65,3 +65,7 @@ li{
   .smallfont{
       font-size: 12px;
   }
+
+  .table-responsive{
+      overflow-y: visible;
+  }
