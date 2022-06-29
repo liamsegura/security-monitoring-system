@@ -83,33 +83,33 @@
                       <a href="/">Dashboard</a>
                   </div>
               </div>
-              <div class="modal fade" id="exampleModal<%=building._id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Delete Site</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Are you sure you want to permanent delete <%= building.name %>?</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <form id="removePrompt" onClick="clicked()" action="/building/<%= building._id %>?_method=DELETE" method="POST">
-                              <button type="submit" class="btn btn-primary">Confirm</button>
-                             </form>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-                <%}%>
-          <% }) %>    
+              
           </div>
           <!-- /.container-fluid -->
 
         </div>
         <!-- End of Main Content -->
-       
+        <div class="modal fade" id="exampleModal<%=building._id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Delete Site</h5>
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">Are you sure you want to permanent delete <%= building.name %>?</div>
+                  <div class="modal-footer">
+                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                      <form id="removePrompt" onClick="clicked()" action="/building/<%= building._id %>?_method=DELETE" method="POST">
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                       </form>
+                  </div>
+              </div>
+          </div>
+      </div>  
+          <%}%>
+    <% }) %>    
 <%- include('partials/footer.ejs') %>
 
