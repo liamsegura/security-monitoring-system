@@ -59,22 +59,39 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <% let buildingID = "" %>
-                                  <% let buildingName = "" %>
-
+                
                                       <% buildings.forEach(building => { %>
                                           <% if( building.listed == true) { %>
-                                           <% buildingID = building._id %>
-                                           <% buildingName = building.name %>
+                                    
                                             <tr>
                                                 <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.name %></td>
                                                 <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.location %></td>
                                                 <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.rooms.length %></td>
                                                 <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.staff %></td>
-                                                <td class="cursor-pointer bg-danger text-center" class="clickable" data-toggle="modal" data-target="#exampleModal">
+                                                <td class="cursor-pointer bg-danger text-center" class="clickable" data-toggle="modal" data-target="#exampleModal<%=building._id%>">
                                                   <i class="fa fa-ban text-white" ></i>
                                                 </td>
                                             </tr>    
+                                            <div class="modal fade" id="exampleModal<%=building._id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Remove Site</h5>
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">Are you sure you want to remove <%= building.name %>?</div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                        <form action="/building/remove/<%= building._id %>?_method=PUT" method="POST">
+                                                          <button type="submit" class="btn btn-primary">Confirm</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                             <%}%>
                                             <% }) %>                                  
                                     </tbody>
@@ -89,26 +106,7 @@
             <!-- /.container-fluid -->
              
         <!-- End of Main Content -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Remove Site</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Are you sure you want to remove <%= buildingName %>?</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <form action="/building/remove/<%= buildingID %>?_method=PUT" method="POST">
-                  <button type="submit" class="btn btn-primary">Confirm</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+       
 
 <%- include('partials/footer.ejs') %>
 

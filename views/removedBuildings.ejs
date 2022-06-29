@@ -59,13 +59,11 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <% let buildingID = "" %>
-                                <% let buildingName = "" %>
+                           
 
                                     <% buildings.forEach(building => { %>
                                         <% if( building.listed == false) { %>
-                                         <% buildingID = building._id %>
-                                         <% buildingName = building.name %>
+                            
                                           <tr>
                                               <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.name %></td>
                                               <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.location %></td>
@@ -73,9 +71,29 @@
                                               <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.staff %></td>
                                               <td class="cursor-pointer bg-danger text-center">
                                                  <!-- Button trigger modal -->
-                                                <a href="#" class="fa fa-ban text-white clickable" data-toggle="modal" data-target="#exampleModal"></a>
+                                                <a href="#" class="fa fa-ban text-white clickable" data-toggle="modal" data-target="#exampleModal<%=building._id%>"></a>
                                               </td>
-                                          </tr>    
+                                          </tr>  
+                                          <div class="modal fade" id="exampleModal<%=building._id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                          aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                  <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Delete Site</h5>
+                                                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">×</span>
+                                                      </button>
+                                                  </div>
+                                                  <div class="modal-body">Are you sure you want to permanent delete <%= building.name %>?</div>
+                                                  <div class="modal-footer">
+                                                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                      <form id="removePrompt" onClick="clicked()" action="/building/<%= building._id %>?_method=DELETE" method="POST">
+                                                        <button type="submit" class="btn btn-primary">Confirm</button>
+                                                       </form>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>  
                                           <%}%>
                                           <% }) %>    
                                         
@@ -91,25 +109,6 @@
 
         </div>
         <!-- End of Main Content -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete Site</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Are you sure you want to permanent delete <%= buildingName %>?</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <form id="removePrompt" onClick="clicked()" action="/building/<%= buildingID %>?_method=DELETE" method="POST">
-                      <button type="submit" class="btn btn-primary">Confirm</button>
-                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
+       
 <%- include('partials/footer.ejs') %>
 
