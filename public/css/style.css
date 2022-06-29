@@ -67,5 +67,5 @@ li{
   }
 
   .table-responsive{
-      overflow-y: visible;
+      overflow-y: visible!important;
   }
