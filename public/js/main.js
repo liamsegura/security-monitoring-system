@@ -1,4 +1,15 @@
 
+// document.querySelector('.badge-counter').addEventListener('click', (e) => {
+//   document.querySelector('.badge-counter').innerHTML = ""
+
+//   fetch(`/updates`)
+
+//   e.preventDefault();
+// })
+
+
+
+
 // const fetchResident = document.querySelector(".fetch-resident")
 
 // fetchResident.addEventListener('click', () => {

@@ -11,6 +11,7 @@
             const UpdateMODEL = req.models.Update
             const update = await UpdateMODEL.find({})
 
+            // UpdateMODEL.collection.drop()
 
             Building.find({}, (err, buildings) => {
                 if(err){
@@ -142,47 +143,69 @@
                 }
         }
 
-//deletes buildings from removed buildings list. deletes from db
-        async buildingDestroy(req, res){
-            const id = req.params.id
-            const Building = req.models.Building
-            const Resident = req.models.Resident
+// //deletes buildings from removed buildings list. deletes from db
+//         async buildingDestroy(req, res){
+//             const id = req.params.id
+//             const Building = req.models.Building
+//             const Resident = req.models.Resident
 
-//finds building and delete
-            //empty arr to push resident ids from building propertie
-            const residentIds = []
-            const buildingId = await Building.findById(id).populate({
-                path: 'rooms',
-                populate: [{
-                 path: 'details',
-                 model: 'Resident'
-                }]
-             }).exec()
+// //finds building and delete
+//             //empty arr to push resident ids from building property
+//             const residentIds = []
+//             const buildingId = await Building.findById(id).populate({
+//                 path: 'rooms',
+//                 populate: [{
+//                  path: 'details',
+//                  model: 'Resident'
+//                 }]
+//              }).exec()
 
-             //for each loop to loop through the rooms that have _ids and pushes them up
-            await buildingId.rooms.forEach(room => {
-                 if(room.details !== null){
-                 residentIds.push(room.details._id)
-                 }
-             })
-            console.log(residentIds)
+//              //for each loop to loop through the rooms that have _ids and pushes them up
+//             await buildingId.rooms.forEach(room => {
+//                  if(room.details !== null ){
+//                  residentIds.push(room.details._id)
+//                  }
+//              })
+//             console.log(residentIds)
 
-            //deletes all of the ids from the resident db that were relational to the deleted building
-            await Resident.deleteMany({_id:{$in:residentIds}})
+//             //deletes all of the ids from the resident db that were relational to the deleted building
+//             await Resident.deleteMany({_id:{$in:residentIds}})
 
-            Building.findByIdAndDelete(id, (err, buildings) => {
-                try{
-                    res.redirect('/removedBuildings')
-                }catch(err){
-                    res.status(400).send(err)
-                }
-            })
-         }
+//             Building.findByIdAndDelete(id, (err, buildings) => {
+//                 try{
+//                     res.redirect('/removedBuildings')
+//                 }catch(err){
+//                     res.status(400).send(err)
+//                 }
+//             })
+//          }
         
 
+//deletes buildings from removed buildings list. deletes from db
+async buildingDestroy(req, res){
+    const id = req.params.id
+    const Building = req.models.Building
+    const Resident = req.models.Resident
+
+    //deletes all residents with the building id
+    await Resident.deleteMany(
+        {
+          building: {
+            $in: id
+          }
+        })
+    
+    //deletes the building
+    await Building.findByIdAndDelete(id)
+        try{
+            res.redirect('/removedBuildings')
+        }catch(err){
+            res.status(400).send(err)
+        }
+ }
 
     // *********************************
-    // BUILDING CONTROLLERS
+    // RESIDENT CONTROLLERS
     // *********************************
 
 
@@ -378,7 +401,15 @@
                 })
             }
 
-
+            
+            //updates
+            updates(req, res){
+                const update = req.models.Update
+                update.dropCollection({}, function(err, delOK) {
+                    if (err) throw err;
+                    if (delOK) console.log("Collection deleted");
+                })
+            }
 
 
 }

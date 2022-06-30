@@ -83,23 +83,29 @@ const Resident = mongoose.model('Resident', residentSchema)
 //History Schema
 const updateSchema = new mongoose.Schema({
    type: String,
-   update: String,
-}, {timestamps: true})
+   resident: Object,
+   time: String,
+},{capped: { size: 36000, max: 20, autoIndexId: true }})
+
 
 const Update = mongoose.model('Update', updateSchema)
 
 
 Resident.watch().on("change", (data) => {
-       Resident.findById(data.documentKey._id, (err, resident) => {
+    
+    const date = new Date().toLocaleString('en-GB', {timeZone: 'Europe/London'})
+
+    if(data.operationType == "insert"){
+       Resident.findById(data.documentKey._id, (err, info) => {
         if(err){
             res.status(400).send(err)
         }else{
-            Update.create({type: data.operationType, update: resident.name})
+            Update.create({type: `${info.name} allocated to room ${info.roomnumber}`, resident: info, time: date})
+            console.log(data)
         }
     })
+  }
 })
-
-
 
 
 // *********************************
@@ -159,6 +165,10 @@ MainRoutes.get('/updateResident/:id', mainController.updateResident)//view updat
 MainRoutes.put('/residentUpdated/:id', mainController.residentUpdated)//put request updates residents data
 MainRoutes.put('/remove/:buildingID/:residentID', mainController.residentRemove) //remove resident onto buildings checkout list
 MainRoutes.get("/checkoutList/:id", mainController.removedResidents) // view removed residents 
+
+
+//alerts
+MainRoutes.get('/alerts', mainController.updates)
 
 // *********************************
 // API Routes that Return JSON

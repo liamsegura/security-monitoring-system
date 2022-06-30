@@ -54,7 +54,6 @@
                                   <th>Building</th>
                                   <th>Location</th>
                                   <th>Rooms</th>
-                                  <th>Staff</th>
                                   <th></th>
                                 </tr>
                               </thead>
@@ -68,7 +67,6 @@
                                               <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.name %></td>
                                               <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.location %></td>
                                               <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.rooms.length %></td>
-                                              <td class="cursor-pointer"onClick="window.location='/building/<%= building._id %>'"> <%= building.staff %></td>
                                               <td class="cursor-pointer bg-danger text-center">
                                                  <!-- Button trigger modal -->
                                                 <a href="#" class="fa fa-ban text-white clickable" data-toggle="modal" data-target="#exampleModal<%=building._id%>"></a>
