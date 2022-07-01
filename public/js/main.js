@@ -1,6 +1,31 @@
 
-// document.querySelector('.badge-counter').addEventListener('click', (e) => {
-//   document.querySelector('.badge-counter').innerHTML = ""
+
+const deleteBtn = document.querySelector('.dropdown-toggle').addEventListener('click', deleteAlerts)
+//if update db = 0, remove counter and remove toggle for drop down
+if(document.querySelector('.badge-counter').innerHTML == "0"){
+  document.querySelector('.badge-counter').innerHTML = ""
+  document.querySelector('.dropdown-toggle').removeAttribute('data-toggle')
+}
+
+//send delete to updates db
+async function deleteAlerts(){
+
+  document.querySelector('.badge-counter').innerHTML = ""
+
+  try{
+      const response = await fetch('/alerts', {
+          method: 'delete',
+      })
+      const data = await response.json()
+      console.log(data)
+  }catch(err){
+      console.log(err)
+  }
+}
+
+
+
+
 
 //   fetch(`/updates`)
 

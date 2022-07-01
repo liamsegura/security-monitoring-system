@@ -123,7 +123,7 @@
                                       <button class="fs-6 in-out" type="submit" name="seenBtn" value="IN"><span>IN</span></button><button class="in-out fs-6" type="submit" name="seenBtn" value="OUT"><span>OUT</span></button>
                                     </form>
                                   </th>
-                                  <th class="text-center"> <span><%= obj.details.seen[obj.details.seen.length -1].seenTime.slice(11, 17)%></span> - <span><%= obj.details.seen[obj.details.seen.length -1].currentlySeen%></span></th>
+                                  <th> <span><%= obj.details.seen[obj.details.seen.length -1].seenTime.slice(11, 17)%></span> - <span><%= obj.details.seen[obj.details.seen.length -1].currentlySeen%></span></th>
                                   <td class="fetch-resident cursor-pointer bg-danger text-center" class="clickable" data-attribute="<%= obj.details._id%>" data-toggle="modal" data-target="#exampleModal<%= obj.details._id%>">
                                     <i class="fa fa-ban text-white"></i>
                                   </td>                                        

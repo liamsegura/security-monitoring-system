@@ -405,12 +405,13 @@ async buildingDestroy(req, res){
             //updates
             updates(req, res){
                 const update = req.models.Update
-                update.dropCollection({}, function(err, delOK) {
+                //NEED TO SEPERATE USER SESSION TO SHOW UPDATES FOR EACH USER
+                update.deleteMany({}, function(err, delOK) {
                     if (err) throw err;
                     if (delOK) console.log("Collection deleted");
                 })
             }
-
+            
 
 }
  

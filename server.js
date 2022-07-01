@@ -168,7 +168,7 @@ MainRoutes.get("/checkoutList/:id", mainController.removedResidents) // view rem
 
 
 //alerts
-MainRoutes.get('/alerts', mainController.updates)
+MainRoutes.delete('/alerts', mainController.updates)
 
 // *********************************
 // API Routes that Return JSON
