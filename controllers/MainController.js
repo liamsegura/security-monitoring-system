@@ -54,7 +54,7 @@
                 if(err){
                     res.status(400).send(err)
                 }else{
-                    res.redirect('/')
+                    res.redirect('/dashboard')
                 }
             })
         }
@@ -124,7 +124,7 @@
                     if(err){
                         res.status(400).send(err)
                     }else{
-                        res.redirect('/')
+                        res.redirect('/dashboard')
                     }
                 })
             }
