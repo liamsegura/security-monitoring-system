@@ -180,6 +180,7 @@ UnauthRoutes.post('/logout', unauthController.logout)
 // Routes that Render Pages with EJS
 // *********************************
 MainRoutes.get("/dashboard", mainController.index) // "/"
+MainRoutes.post('/searchBuilding', mainController.searchBuilding)
 MainRoutes.get("/newBuilding", mainController.newBuilding) // new building form
 MainRoutes.post('/createBuilding', mainController.createBuilding) // create building from form
 MainRoutes.get('/building/:id', mainController.viewBuilding) // view building from /
@@ -192,6 +193,7 @@ MainRoutes.delete('/building/:id', mainController.buildingDestroy) // delete bui
 
 //Resident Routes
 MainRoutes.get('/newResident/:id/:roomNumber', mainController.newResident) // view resident form
+MainRoutes.post('/:id/searchResident', mainController.searchResident)
 MainRoutes.post('/createResident', mainController.createResident) // create resident from form
 MainRoutes.get('/resident/:id', mainController.viewResident) // view resident from building
 MainRoutes.put('/seen/:buildingID/:residentID', mainController.residentSeen) // pushes timestamp into seen list

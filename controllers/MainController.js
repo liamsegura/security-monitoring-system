@@ -10,9 +10,6 @@
             const Resident = req.models.Resident
             const UpdateMODEL = req.models.Update
             const update = await UpdateMODEL.find({})
-
-            // UpdateMODEL.collection.drop()
-
             Building.find({}, (err, buildings) => {
                 if(err){
                 res.status(400).send(err)
@@ -21,8 +18,29 @@
                  }
              })
             }
+            
 
-        //view new building form
+//search building
+    async searchBuilding(req, res){
+    const Building = req.models.Building
+    // const buildingName = req.body
+    const UpdateMODEL = req.models.Update
+    const update = await UpdateMODEL.find({})
+    let buildings = await Building.find({name: req.body.buildingName})
+    if(req.body.buildingName == ""){
+        buildings = await Building.find({})
+    }
+        try{
+            console.log(buildings)
+            res.render('index.ejs', {buildings, update})
+        }catch{
+
+        }
+}
+
+
+
+//view new building form
         async newBuilding(req, res){
             const Change = req.change
             const UpdateMODEL = req.models.Update
@@ -59,6 +77,9 @@
             })
         }
 
+
+
+
 //view building on click
         async viewBuilding(req, res){
             //takes param for building id
@@ -76,16 +97,27 @@
                  model: 'Resident'
                 }]
              }).exec()
+             let emptyRooms = []
+            //  building.rooms.forEach(room => {
+            //     if(room.details == null){
+            //         emptyRooms.length = 0
+            //         emptyRooms.push(room)
+            //     }
+            //  })
              //renders the building with the building plus the room data
                 try {
                     const rooms = await building.rooms
-                    res.render('building.ejs', {rooms, building, update})  
+                    res.render('building.ejs', {rooms, building, update, emptyRooms})  
                 } catch (error) {
                     console.log(error)
                 }
                     
             }
         
+
+
+
+
 //opens form to update building
         async updateBuilding(req, res){
             const id = req.params.id
@@ -226,6 +258,26 @@ async buildingDestroy(req, res){
                 }
             })
         }
+
+
+//search building
+async searchResident(req, res){
+    const id = req.params.id
+    const residentModel = req.models.Resident
+    const UpdateMODEL = req.models.Update
+    const update = await UpdateMODEL.find({})
+
+    const resident = await residentModel.find().populate('building')
+
+        try {
+            res.render('resident.ejs', {resident, update})  
+        } catch (error) {
+            res.redirect('/dashboard')
+            console.log(error)
+        }
+            
+    }
+  
 
 //creates a resident, and pushes the data into the relating buildings room array
         async createResident (req, res){

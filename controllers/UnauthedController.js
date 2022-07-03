@@ -9,7 +9,7 @@ class UnauthController {
 
     signup(req, res){
         const User = req.models.User
-        const {username} = req.body
+        const username = req.body.username.toLowerCase()
         const password = bcrypt.hashSync(req.body.password, 10)
         User.create({username, password}, (err, user) => {
                 if(err){
@@ -22,7 +22,8 @@ class UnauthController {
 
     login(req, res){
         const User = req.models.User
-        const {username, password} = req.body
+        const username =  req.body.username.toLowerCase()
+        const password = req.body.password.toLowerCase()
         User.findOne({username}, (err, user) => {
             if(err){
                 res.status(400).send(err)
