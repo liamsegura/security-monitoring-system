@@ -1,4 +1,4 @@
-# OOP Monitoring System
+# Security Monitoring System
 Full-stack application with a secure login for GDPR compliance used for storing sensitive information as well as tracking for welfare concerns. This app was created for a security company, specialising in welfare.
 
 ## Demo
